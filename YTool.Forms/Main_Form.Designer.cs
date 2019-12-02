@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Form));
             this.txt_Main = new System.Windows.Forms.TextBox();
             this.btn_Deduplication = new System.Windows.Forms.Button();
             this.btn_Sum = new System.Windows.Forms.Button();
+            this.nfi_MinWindow = new System.Windows.Forms.NotifyIcon(this.components);
+            this.cms_nfi = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsm_Deduplication = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsm_Close = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_nfi.SuspendLayout();
             this.SuspendLayout();
             // 
             // txt_Main
@@ -63,6 +71,44 @@
             this.btn_Sum.UseVisualStyleBackColor = true;
             this.btn_Sum.Click += new System.EventHandler(this.btn_Sum_Click);
             // 
+            // nfi_MinWindow
+            // 
+            this.nfi_MinWindow.BalloonTipText = "YTool";
+            this.nfi_MinWindow.ContextMenuStrip = this.cms_nfi;
+            this.nfi_MinWindow.Icon = ((System.Drawing.Icon)(resources.GetObject("nfi_MinWindow.Icon")));
+            this.nfi_MinWindow.Text = "Min Window";
+            this.nfi_MinWindow.Visible = true;
+            this.nfi_MinWindow.MouseClick += new System.Windows.Forms.MouseEventHandler(this.nfi_MinWindow_MouseClick);
+            // 
+            // cms_nfi
+            // 
+            this.cms_nfi.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsm_Deduplication,
+            this.toolStripSeparator1,
+            this.tsm_Close});
+            this.cms_nfi.Name = "cms_nfi";
+            this.cms_nfi.Size = new System.Drawing.Size(181, 76);
+            // 
+            // tsm_Deduplication
+            // 
+            this.tsm_Deduplication.Name = "tsm_Deduplication";
+            this.tsm_Deduplication.Size = new System.Drawing.Size(180, 22);
+            this.tsm_Deduplication.Text = "去重";
+            this.tsm_Deduplication.Click += new System.EventHandler(this.tsm_Deduplication_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // tsm_Close
+            // 
+            this.tsm_Close.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.tsm_Close.Name = "tsm_Close";
+            this.tsm_Close.Size = new System.Drawing.Size(180, 22);
+            this.tsm_Close.Text = "关闭";
+            this.tsm_Close.Click += new System.EventHandler(this.tsm_Close_Click);
+            // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -73,6 +119,8 @@
             this.Controls.Add(this.txt_Main);
             this.Name = "Main_Form";
             this.Text = "YTool";
+            this.SizeChanged += new System.EventHandler(this.Main_Form_SizeChanged);
+            this.cms_nfi.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -83,6 +131,11 @@
         private System.Windows.Forms.TextBox txt_Main;
         private System.Windows.Forms.Button btn_Deduplication;
         private System.Windows.Forms.Button btn_Sum;
+        private System.Windows.Forms.NotifyIcon nfi_MinWindow;
+        private System.Windows.Forms.ContextMenuStrip cms_nfi;
+        private System.Windows.Forms.ToolStripMenuItem tsm_Deduplication;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem tsm_Close;
     }
 }
 

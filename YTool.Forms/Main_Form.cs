@@ -47,5 +47,70 @@ namespace YTool.Forms
             var resArr = text.Replace(Environment.NewLine, "^").Split(new[] { '^' }, StringSplitOptions.RemoveEmptyEntries);
             return resArr;
         }
+
+        private void Main_Form_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                //不在系统任务栏显示主窗口图标
+                this.ShowInTaskbar = false;
+            }
+        }
+
+        private void nfi_MinWindow_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Activate_Main_Form();
+            }
+        }
+
+        private void tsm_Deduplication_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IDataObject iData = Clipboard.GetDataObject();
+                if (iData.GetDataPresent(DataFormats.Text))
+                {
+                    var text = (string)iData.GetData(DataFormats.UnicodeText);
+                    if (string.IsNullOrWhiteSpace(text))
+                        return;
+
+                    var resArr = GetTextArr(text);
+                    resArr = resArr.Distinct().ToArray();
+
+                    txt_Main.Text = string.Join(Environment.NewLine, resArr);
+
+                    Activate_Main_Form();
+                }
+                else
+                {
+                    MessageBox.Show("目前剪贴板中数据不可转换为文本", "错误");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private void Activate_Main_Form()
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                //还原窗体
+                this.WindowState = FormWindowState.Normal;
+                //系统任务栏显示图标
+                this.ShowInTaskbar = true;
+            }
+            //激活窗体并获取焦点
+            this.Activate();
+        }
+
+        private void tsm_Close_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+            this.Close();
+        }
     }
 }
