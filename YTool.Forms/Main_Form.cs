@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -111,6 +113,41 @@ namespace YTool.Forms
         {
             this.Dispose();
             this.Close();
+        }
+
+        private void btn_json_format_Click(object sender, EventArgs e)
+        {
+            JsonWriter(Formatting.Indented);
+        }
+
+        private void btn_json_compression_Click(object sender, EventArgs e)
+        {
+            JsonWriter(Formatting.None);
+        }
+
+        private void JsonWriter(Formatting formatting)
+        {
+            var text = txt_Main.Text;
+            if (string.IsNullOrWhiteSpace(text))
+                return;
+
+            //格式化json字符串
+            JsonSerializer serializer = new JsonSerializer();
+            TextReader tr = new StringReader(text);
+            JsonTextReader jtr = new JsonTextReader(tr);
+            object obj = serializer.Deserialize(jtr);
+            if (obj != null)
+            {
+                StringWriter textWriter = new StringWriter();
+                JsonTextWriter jsonWriter = new JsonTextWriter(textWriter)
+                {
+                    Formatting = formatting,
+                    Indentation = 4,
+                    IndentChar = ' '
+                };
+                serializer.Serialize(jsonWriter, obj);
+                txt_Main.Text = textWriter.ToString();
+            }
         }
     }
 }

@@ -38,6 +38,8 @@
             this.tsm_Deduplication = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsm_Close = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_json_format = new System.Windows.Forms.Button();
+            this.btn_json_compression = new System.Windows.Forms.Button();
             this.cms_nfi.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,33 +89,55 @@
             this.toolStripSeparator1,
             this.tsm_Close});
             this.cms_nfi.Name = "cms_nfi";
-            this.cms_nfi.Size = new System.Drawing.Size(181, 76);
+            this.cms_nfi.Size = new System.Drawing.Size(101, 54);
             // 
             // tsm_Deduplication
             // 
             this.tsm_Deduplication.Name = "tsm_Deduplication";
-            this.tsm_Deduplication.Size = new System.Drawing.Size(180, 22);
+            this.tsm_Deduplication.Size = new System.Drawing.Size(100, 22);
             this.tsm_Deduplication.Text = "去重";
             this.tsm_Deduplication.Click += new System.EventHandler(this.tsm_Deduplication_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(97, 6);
             // 
             // tsm_Close
             // 
             this.tsm_Close.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tsm_Close.Name = "tsm_Close";
-            this.tsm_Close.Size = new System.Drawing.Size(180, 22);
+            this.tsm_Close.Size = new System.Drawing.Size(100, 22);
             this.tsm_Close.Text = "关闭";
             this.tsm_Close.Click += new System.EventHandler(this.tsm_Close_Click);
+            // 
+            // btn_json_format
+            // 
+            this.btn_json_format.Location = new System.Drawing.Point(174, 12);
+            this.btn_json_format.Name = "btn_json_format";
+            this.btn_json_format.Size = new System.Drawing.Size(75, 23);
+            this.btn_json_format.TabIndex = 3;
+            this.btn_json_format.Text = "Json格式化";
+            this.btn_json_format.UseVisualStyleBackColor = true;
+            this.btn_json_format.Click += new System.EventHandler(this.btn_json_format_Click);
+            // 
+            // btn_json_compression
+            // 
+            this.btn_json_compression.Location = new System.Drawing.Point(255, 12);
+            this.btn_json_compression.Name = "btn_json_compression";
+            this.btn_json_compression.Size = new System.Drawing.Size(75, 23);
+            this.btn_json_compression.TabIndex = 4;
+            this.btn_json_compression.Text = "Json压缩";
+            this.btn_json_compression.UseVisualStyleBackColor = true;
+            this.btn_json_compression.Click += new System.EventHandler(this.btn_json_compression_Click);
             // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 411);
+            this.Controls.Add(this.btn_json_compression);
+            this.Controls.Add(this.btn_json_format);
             this.Controls.Add(this.btn_Sum);
             this.Controls.Add(this.btn_Deduplication);
             this.Controls.Add(this.txt_Main);
@@ -136,6 +160,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsm_Deduplication;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsm_Close;
+        private System.Windows.Forms.Button btn_json_format;
+        private System.Windows.Forms.Button btn_json_compression;
     }
 }
 
