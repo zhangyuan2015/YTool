@@ -33,11 +33,11 @@ namespace YTool.Forms
 
             var resArr = GetTextArr(text);
 
-            var resInt = 0;
+            var resInt = 0m;
             foreach (var res in resArr)
             {
-                var tmpInt = 0;
-                if (int.TryParse(res, out tmpInt))
+                var tmpInt = 0m;
+                if (decimal.TryParse(res, out tmpInt))
                     resInt += tmpInt;
             }
 
