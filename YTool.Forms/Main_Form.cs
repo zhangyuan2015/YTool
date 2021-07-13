@@ -39,6 +39,11 @@ namespace YTool.Forms
                 var tmpInt = 0m;
                 if (decimal.TryParse(res, out tmpInt))
                     resInt += tmpInt;
+                else
+                {
+                    MessageBox.Show("数字转换失败：" + res, "错误");
+                    return;
+                }
             }
 
             txt_Main.Text = resInt.ToString();
@@ -129,7 +134,10 @@ namespace YTool.Forms
         {
             var text = txt_Main.Text;
             if (string.IsNullOrWhiteSpace(text))
+            {
+                MessageBox.Show("请输入Json文本");
                 return;
+            }
 
             //格式化json字符串
             JsonSerializer serializer = new JsonSerializer();
@@ -148,6 +156,50 @@ namespace YTool.Forms
                 serializer.Serialize(jsonWriter, obj);
                 txt_Main.Text = textWriter.ToString();
             }
+        }
+
+        private void btnImg2Base64_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IDataObject iData = Clipboard.GetDataObject();
+                if (iData.GetDataPresent(DataFormats.Text))
+                {
+                    var text = (string)iData.GetData(DataFormats.UnicodeText);
+                    if (string.IsNullOrWhiteSpace(text))
+                        return;
+
+                    txt_Main.Text = text;
+
+                    Activate_Main_Form();
+                }
+                else
+                {
+                    MessageBox.Show("目前剪贴板中数据不可转换为文本", "错误");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private void btnToUpper_Click(object sender, EventArgs e)
+        {
+            var text = txt_Main.Text;
+            if (string.IsNullOrWhiteSpace(text))
+                return;
+
+            txt_Main.Text = string.Join(Environment.NewLine, GetTextArr(text).Select(a => a.ToUpper()));
+        }
+
+        private void btnToLower_Click(object sender, EventArgs e)
+        {
+            var text = txt_Main.Text;
+            if (string.IsNullOrWhiteSpace(text))
+                return;
+
+            txt_Main.Text = string.Join(Environment.NewLine, GetTextArr(text).Select(a => a.ToLower()));
         }
     }
 }

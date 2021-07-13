@@ -40,12 +40,16 @@
             this.tsm_Close = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_json_format = new System.Windows.Forms.Button();
             this.btn_json_compression = new System.Windows.Forms.Button();
+            this.btnImg2Base64 = new System.Windows.Forms.Button();
+            this.btnToUpper = new System.Windows.Forms.Button();
+            this.btnToLower = new System.Windows.Forms.Button();
             this.cms_nfi.SuspendLayout();
             this.SuspendLayout();
             // 
             // txt_Main
             // 
             this.txt_Main.Location = new System.Drawing.Point(12, 46);
+            this.txt_Main.MaxLength = 1048576;
             this.txt_Main.Multiline = true;
             this.txt_Main.Name = "txt_Main";
             this.txt_Main.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -115,27 +119,60 @@
             // 
             this.btn_json_format.Location = new System.Drawing.Point(174, 12);
             this.btn_json_format.Name = "btn_json_format";
-            this.btn_json_format.Size = new System.Drawing.Size(75, 23);
+            this.btn_json_format.Size = new System.Drawing.Size(79, 23);
             this.btn_json_format.TabIndex = 3;
-            this.btn_json_format.Text = "Json格式化";
+            this.btn_json_format.Text = "Json 格式化";
             this.btn_json_format.UseVisualStyleBackColor = true;
             this.btn_json_format.Click += new System.EventHandler(this.btn_json_format_Click);
             // 
             // btn_json_compression
             // 
-            this.btn_json_compression.Location = new System.Drawing.Point(255, 12);
+            this.btn_json_compression.Location = new System.Drawing.Point(259, 12);
             this.btn_json_compression.Name = "btn_json_compression";
             this.btn_json_compression.Size = new System.Drawing.Size(75, 23);
             this.btn_json_compression.TabIndex = 4;
-            this.btn_json_compression.Text = "Json压缩";
+            this.btn_json_compression.Text = "Json 压缩";
             this.btn_json_compression.UseVisualStyleBackColor = true;
             this.btn_json_compression.Click += new System.EventHandler(this.btn_json_compression_Click);
+            // 
+            // btnImg2Base64
+            // 
+            this.btnImg2Base64.Location = new System.Drawing.Point(340, 12);
+            this.btnImg2Base64.Name = "btnImg2Base64";
+            this.btnImg2Base64.Size = new System.Drawing.Size(86, 23);
+            this.btnImg2Base64.TabIndex = 5;
+            this.btnImg2Base64.Text = "图片2Base64";
+            this.btnImg2Base64.UseVisualStyleBackColor = true;
+            this.btnImg2Base64.Click += new System.EventHandler(this.btnImg2Base64_Click);
+            // 
+            // btnToUpper
+            // 
+            this.btnToUpper.Location = new System.Drawing.Point(432, 12);
+            this.btnToUpper.Name = "btnToUpper";
+            this.btnToUpper.Size = new System.Drawing.Size(75, 23);
+            this.btnToUpper.TabIndex = 6;
+            this.btnToUpper.Text = "转大写";
+            this.btnToUpper.UseVisualStyleBackColor = true;
+            this.btnToUpper.Click += new System.EventHandler(this.btnToUpper_Click);
+            // 
+            // btnToLower
+            // 
+            this.btnToLower.Location = new System.Drawing.Point(513, 12);
+            this.btnToLower.Name = "btnToLower";
+            this.btnToLower.Size = new System.Drawing.Size(75, 23);
+            this.btnToLower.TabIndex = 7;
+            this.btnToLower.Text = "转小写";
+            this.btnToLower.UseVisualStyleBackColor = true;
+            this.btnToLower.Click += new System.EventHandler(this.btnToLower_Click);
             // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 411);
+            this.ClientSize = new System.Drawing.Size(804, 402);
+            this.Controls.Add(this.btnToLower);
+            this.Controls.Add(this.btnToUpper);
+            this.Controls.Add(this.btnImg2Base64);
             this.Controls.Add(this.btn_json_compression);
             this.Controls.Add(this.btn_json_format);
             this.Controls.Add(this.btn_Sum);
@@ -162,6 +199,9 @@
         private System.Windows.Forms.ToolStripMenuItem tsm_Close;
         private System.Windows.Forms.Button btn_json_format;
         private System.Windows.Forms.Button btn_json_compression;
+        private System.Windows.Forms.Button btnImg2Base64;
+        private System.Windows.Forms.Button btnToUpper;
+        private System.Windows.Forms.Button btnToLower;
     }
 }
 
