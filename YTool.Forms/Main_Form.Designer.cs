@@ -43,17 +43,23 @@
             this.btnImg2Base64 = new System.Windows.Forms.Button();
             this.btnToUpper = new System.Windows.Forms.Button();
             this.btnToLower = new System.Windows.Forms.Button();
+            this.btnDY = new System.Windows.Forms.Button();
+            this.btnSY = new System.Windows.Forms.Button();
+            this.btnDH = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.cbxFX = new System.Windows.Forms.CheckBox();
             this.cms_nfi.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txt_Main
             // 
-            this.txt_Main.Location = new System.Drawing.Point(12, 46);
+            this.txt_Main.Location = new System.Drawing.Point(12, 50);
             this.txt_Main.MaxLength = 1048576;
             this.txt_Main.Multiline = true;
             this.txt_Main.Name = "txt_Main";
             this.txt_Main.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txt_Main.Size = new System.Drawing.Size(776, 345);
+            this.txt_Main.Size = new System.Drawing.Size(776, 357);
             this.txt_Main.TabIndex = 0;
             this.txt_Main.WordWrap = false;
             // 
@@ -165,11 +171,64 @@
             this.btnToLower.UseVisualStyleBackColor = true;
             this.btnToLower.Click += new System.EventHandler(this.btnToLower_Click);
             // 
+            // btnDY
+            // 
+            this.btnDY.Location = new System.Drawing.Point(0, 0);
+            this.btnDY.Name = "btnDY";
+            this.btnDY.Size = new System.Drawing.Size(26, 23);
+            this.btnDY.TabIndex = 8;
+            this.btnDY.Text = "\'\'";
+            this.btnDY.UseVisualStyleBackColor = true;
+            this.btnDY.Click += new System.EventHandler(this.btnDY_Click);
+            // 
+            // btnSY
+            // 
+            this.btnSY.Location = new System.Drawing.Point(32, 0);
+            this.btnSY.Name = "btnSY";
+            this.btnSY.Size = new System.Drawing.Size(26, 23);
+            this.btnSY.TabIndex = 9;
+            this.btnSY.Text = "\"\"";
+            this.btnSY.UseVisualStyleBackColor = true;
+            this.btnSY.Click += new System.EventHandler(this.btnSY_Click);
+            // 
+            // btnDH
+            // 
+            this.btnDH.Location = new System.Drawing.Point(64, 0);
+            this.btnDH.Name = "btnDH";
+            this.btnDH.Size = new System.Drawing.Size(26, 23);
+            this.btnDH.TabIndex = 10;
+            this.btnDH.Text = ",";
+            this.btnDH.UseVisualStyleBackColor = true;
+            this.btnDH.Click += new System.EventHandler(this.btnDH_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.cbxFX);
+            this.panel1.Controls.Add(this.btnDY);
+            this.panel1.Controls.Add(this.btnDH);
+            this.panel1.Controls.Add(this.btnSY);
+            this.panel1.Location = new System.Drawing.Point(594, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(150, 25);
+            this.panel1.TabIndex = 11;
+            // 
+            // cbxFX
+            // 
+            this.cbxFX.AutoSize = true;
+            this.cbxFX.Location = new System.Drawing.Point(96, 3);
+            this.cbxFX.Name = "cbxFX";
+            this.cbxFX.Size = new System.Drawing.Size(48, 16);
+            this.cbxFX.TabIndex = 12;
+            this.cbxFX.Text = "清除";
+            this.cbxFX.UseVisualStyleBackColor = true;
+            // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 402);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnToLower);
             this.Controls.Add(this.btnToUpper);
             this.Controls.Add(this.btnImg2Base64);
@@ -182,6 +241,8 @@
             this.Text = "YTool";
             this.SizeChanged += new System.EventHandler(this.Main_Form_SizeChanged);
             this.cms_nfi.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,6 +263,11 @@
         private System.Windows.Forms.Button btnImg2Base64;
         private System.Windows.Forms.Button btnToUpper;
         private System.Windows.Forms.Button btnToLower;
+        private System.Windows.Forms.Button btnDY;
+        private System.Windows.Forms.Button btnSY;
+        private System.Windows.Forms.Button btnDH;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox cbxFX;
     }
 }
 

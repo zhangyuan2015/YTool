@@ -201,5 +201,45 @@ namespace YTool.Forms
 
             txt_Main.Text = string.Join(Environment.NewLine, GetTextArr(text).Select(a => a.ToLower()));
         }
+
+        private void btnDY_Click(object sender, EventArgs e)
+        {
+            var text = txt_Main.Text;
+            if (string.IsNullOrWhiteSpace(text))
+                return;
+            if (cbxFX.Checked)
+                txt_Main.Text = string.Join(Environment.NewLine, GetTextArr(text).Select(a => a.Trim('\'')));
+            else
+                txt_Main.Text = string.Join(Environment.NewLine, GetTextArr(text).Select(a => "'" + a.Trim('\'') + "'"));
+        }
+
+        private void btnSY_Click(object sender, EventArgs e)
+        {
+            var text = txt_Main.Text;
+            if (string.IsNullOrWhiteSpace(text))
+                return;
+            if (cbxFX.Checked)
+            {
+                txt_Main.Text = string.Join(Environment.NewLine, GetTextArr(text).Select(a => a.Trim('"')));
+            }
+            else
+            {
+                txt_Main.Text = string.Join(Environment.NewLine, GetTextArr(text).Select(a => "\"" + a.Trim('"') + "\""));
+            }
+        }
+
+        private void btnDH_Click(object sender, EventArgs e)
+        {
+            var text = txt_Main.Text;
+            if (string.IsNullOrWhiteSpace(text))
+                return;
+            if (cbxFX.Checked)
+                txt_Main.Text = string.Join(Environment.NewLine, GetTextArr(text).Select(a => a.TrimEnd(',')));
+            else
+            {
+                txt_Main.Text = string.Join(Environment.NewLine, GetTextArr(text).Select(a => a.TrimEnd(',') + ","));
+            }
+        
+        }
     }
 }
