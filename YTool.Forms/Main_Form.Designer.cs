@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Form));
-            this.txt_Main = new System.Windows.Forms.TextBox();
             this.btn_Deduplication = new System.Windows.Forms.Button();
             this.btn_Sum = new System.Windows.Forms.Button();
             this.nfi_MinWindow = new System.Windows.Forms.NotifyIcon(this.components);
@@ -48,20 +47,15 @@
             this.btnDH = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cbxFX = new System.Windows.Forms.CheckBox();
+            this.btnBF = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnGroup = new System.Windows.Forms.Button();
+            this.txtGroupCount = new System.Windows.Forms.TextBox();
+            this.txt_Main = new System.Windows.Forms.RichTextBox();
             this.cms_nfi.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txt_Main
-            // 
-            this.txt_Main.Location = new System.Drawing.Point(12, 50);
-            this.txt_Main.MaxLength = 1048576;
-            this.txt_Main.Multiline = true;
-            this.txt_Main.Name = "txt_Main";
-            this.txt_Main.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txt_Main.Size = new System.Drawing.Size(776, 357);
-            this.txt_Main.TabIndex = 0;
-            this.txt_Main.WordWrap = false;
             // 
             // btn_Deduplication
             // 
@@ -223,11 +217,59 @@
             this.cbxFX.Text = "清除";
             this.cbxFX.UseVisualStyleBackColor = true;
             // 
+            // btnBF
+            // 
+            this.btnBF.Location = new System.Drawing.Point(12, 41);
+            this.btnBF.Name = "btnBF";
+            this.btnBF.Size = new System.Drawing.Size(75, 23);
+            this.btnBF.TabIndex = 12;
+            this.btnBF.Text = "并发";
+            this.btnBF.UseVisualStyleBackColor = true;
+            this.btnBF.Click += new System.EventHandler(this.btnBF_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.txtGroupCount);
+            this.panel2.Controls.Add(this.btnGroup);
+            this.panel2.Location = new System.Drawing.Point(93, 41);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(143, 25);
+            this.panel2.TabIndex = 13;
+            // 
+            // btnGroup
+            // 
+            this.btnGroup.Location = new System.Drawing.Point(59, 0);
+            this.btnGroup.Name = "btnGroup";
+            this.btnGroup.Size = new System.Drawing.Size(75, 23);
+            this.btnGroup.TabIndex = 14;
+            this.btnGroup.Text = "分组";
+            this.btnGroup.UseVisualStyleBackColor = true;
+            this.btnGroup.Click += new System.EventHandler(this.btnGroup_Click);
+            // 
+            // txtGroupCount
+            // 
+            this.txtGroupCount.Location = new System.Drawing.Point(3, 1);
+            this.txtGroupCount.Name = "txtGroupCount";
+            this.txtGroupCount.Size = new System.Drawing.Size(51, 21);
+            this.txtGroupCount.TabIndex = 14;
+            // 
+            // txt_Main
+            // 
+            this.txt_Main.Location = new System.Drawing.Point(12, 70);
+            this.txt_Main.Name = "txt_Main";
+            this.txt_Main.Size = new System.Drawing.Size(780, 333);
+            this.txt_Main.TabIndex = 14;
+            this.txt_Main.Text = "";
+            // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 402);
+            this.ClientSize = new System.Drawing.Size(804, 415);
+            this.Controls.Add(this.txt_Main);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.btnBF);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnToLower);
             this.Controls.Add(this.btnToUpper);
@@ -236,21 +278,19 @@
             this.Controls.Add(this.btn_json_format);
             this.Controls.Add(this.btn_Sum);
             this.Controls.Add(this.btn_Deduplication);
-            this.Controls.Add(this.txt_Main);
             this.Name = "Main_Form";
             this.Text = "YTool";
             this.SizeChanged += new System.EventHandler(this.Main_Form_SizeChanged);
             this.cms_nfi.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txt_Main;
         private System.Windows.Forms.Button btn_Deduplication;
         private System.Windows.Forms.Button btn_Sum;
         private System.Windows.Forms.NotifyIcon nfi_MinWindow;
@@ -268,6 +308,11 @@
         private System.Windows.Forms.Button btnDH;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox cbxFX;
+        private System.Windows.Forms.Button btnBF;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnGroup;
+        private System.Windows.Forms.TextBox txtGroupCount;
+        private System.Windows.Forms.RichTextBox txt_Main;
     }
 }
 

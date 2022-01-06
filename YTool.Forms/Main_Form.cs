@@ -1,8 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using YTool.Forms.Service.Model;
 
 namespace YTool.Forms
 {
@@ -51,7 +57,7 @@ namespace YTool.Forms
 
         private string[] GetTextArr(string text)
         {
-            var resArr = text.Replace(Environment.NewLine, "^").Split(new[] { '^' }, StringSplitOptions.RemoveEmptyEntries);
+            var resArr = text.Replace("\n", "^").Split(new[] { '^' }, StringSplitOptions.RemoveEmptyEntries);
             return resArr;
         }
 
@@ -239,7 +245,83 @@ namespace YTool.Forms
             {
                 txt_Main.Text = string.Join(Environment.NewLine, GetTextArr(text).Select(a => a.TrimEnd(',') + ","));
             }
-        
+
+        }
+
+        private void btnBF_Click(object sender, EventArgs e)
+        {
+            var text = txt_Main.Text;
+            if (string.IsNullOrWhiteSpace(text))
+                return;
+            var urlModelList = GetTextArr(text).Select(a => new BingfaTestModel { Id = Guid.NewGuid(), Url = a }).ToList();
+
+            List<Task> tasks = new List<Task>();
+            int index = 1;
+            foreach (var urlModel in urlModelList)
+            {
+                tasks.Add(
+                    Task.Run(() =>
+                    {
+                        var sw = new Stopwatch();
+                        sw.Start();
+                        var getResp = new HttpClient().GetStringAsync(urlModel.Url);
+                        getResp.Wait();
+
+                        urlModel.Index = index;
+                        index++;
+                        urlModel.Result = getResp.Result;
+                        urlModel.Time = sw.Elapsed;
+                    })
+                );
+            }
+            Task.WaitAll(tasks.ToArray());
+            txt_Main.Text = string.Join(Environment.NewLine, urlModelList.OrderBy(a => a.Index).Select(a => a.Index + " - " + a.Url + " - " + a.Result + " - " + a.Time.TotalSeconds));
+        }
+
+        private void btnGroup_Click(object sender, EventArgs e)
+        {
+            var text = txt_Main.Text;
+            if (string.IsNullOrWhiteSpace(text))
+                return;
+
+            int groupNum = 0;
+            int.TryParse(txtGroupCount.Text, out groupNum);
+            if (groupNum <= 0)
+                return;
+
+            var textList = GetTextArr(text).ToList();
+
+            List<string> listGroup = new List<string>();
+            for (int i = 0; i < textList.Count; i += groupNum)
+            {
+                listGroup.Add("Group-" + (i + 1));
+                listGroup.AddRange(textList.Skip(i).Take(groupNum).ToList());
+            }
+            txt_Main.Text = string.Join(Environment.NewLine, listGroup);
+        }
+
+        private void updateLabelRowIndex()
+        {
+            //we get index of first visible char and number of first visible line
+            Point pos = new Point(0, 0);
+            int firstIndex = this.txt_Main.GetCharIndexFromPosition(pos);
+            int firstLine = this.txt_Main.GetLineFromCharIndex(firstIndex);
+
+            //now we get index of last visible char and number of last visible line
+            pos.X += this.txt_Main.ClientRectangle.Width;
+            pos.Y += this.txt_Main.ClientRectangle.Height;
+            int lastIndex = this.txt_Main.GetCharIndexFromPosition(pos);
+            int lastLine = this.txt_Main.GetLineFromCharIndex(lastIndex);
+
+            //this is point position of last visible char,
+            //we'll use its Y value for calculating numberLabel size
+            pos = this.txt_Main.GetPositionFromCharIndex(lastIndex);
+
+            /*labelRowIndex.Text = "";
+            for (int i = firstLine; i <= lastLine + 1; i++)
+            {
+                labelRowIndex.Text += i + 1 + "\r\n";
+            }*/
         }
     }
 }
