@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using MaterialSkin;
+using MaterialSkin.Controls;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,14 +14,37 @@ using YTool.Forms.Service.Model;
 
 namespace YTool.Forms
 {
-    public partial class Main_Form : Form
+    public partial class Main_Form : MaterialForm
     {
         public Main_Form()
         {
             InitializeComponent();
+
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
+
+            btnBF.FlatStyle = FlatStyle.Flat;
+            btnDH.FlatStyle = FlatStyle.Flat;
+            btnDY.FlatStyle = FlatStyle.Flat;
+            btnGroup.FlatStyle = FlatStyle.Flat;
+            btnImg2Base64.FlatStyle = FlatStyle.Flat;
+            btnSY.FlatStyle = FlatStyle.Flat;
+            btnToLower.FlatStyle = FlatStyle.Flat;
+            btnToUpper.FlatStyle = FlatStyle.Flat;
+            btn_Deduplication.FlatStyle = FlatStyle.Flat;
+            btn_json_compression.FlatStyle = FlatStyle.Flat;
+            btn_json_format.FlatStyle = FlatStyle.Flat;
+            btn_Sum.FlatStyle = FlatStyle.Flat;
         }
 
         private void btn_Deduplication_Click(object sender, EventArgs e)
+        {
+            QC();
+        }
+
+        private void QC()
         {
             var text = txt_Main.Text;
             if (string.IsNullOrWhiteSpace(text))
@@ -322,6 +347,11 @@ namespace YTool.Forms
             {
                 labelRowIndex.Text += i + 1 + "\r\n";
             }*/
+        }
+
+        private void btnQC_Click(object sender, EventArgs e)
+        {
+            QC();
         }
     }
 }

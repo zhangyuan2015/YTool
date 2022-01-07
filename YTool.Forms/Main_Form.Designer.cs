@@ -49,17 +49,35 @@
             this.cbxFX = new System.Windows.Forms.CheckBox();
             this.btnBF = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnGroup = new System.Windows.Forms.Button();
             this.txtGroupCount = new System.Windows.Forms.TextBox();
-            this.txt_Main = new System.Windows.Forms.RichTextBox();
+            this.btnGroup = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.txt_Main = new System.Windows.Forms.TextBox();
+            this.txtStatus = new System.Windows.Forms.TextBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnQC = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.cms_nfi.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_Deduplication
             // 
-            this.btn_Deduplication.Location = new System.Drawing.Point(12, 12);
+            this.btn_Deduplication.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Deduplication.Location = new System.Drawing.Point(3, 3);
             this.btn_Deduplication.Name = "btn_Deduplication";
             this.btn_Deduplication.Size = new System.Drawing.Size(75, 23);
             this.btn_Deduplication.TabIndex = 1;
@@ -69,7 +87,8 @@
             // 
             // btn_Sum
             // 
-            this.btn_Sum.Location = new System.Drawing.Point(93, 12);
+            this.btn_Sum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Sum.Location = new System.Drawing.Point(84, 3);
             this.btn_Sum.Name = "btn_Sum";
             this.btn_Sum.Size = new System.Drawing.Size(75, 23);
             this.btn_Sum.TabIndex = 2;
@@ -117,7 +136,7 @@
             // 
             // btn_json_format
             // 
-            this.btn_json_format.Location = new System.Drawing.Point(174, 12);
+            this.btn_json_format.Location = new System.Drawing.Point(165, 3);
             this.btn_json_format.Name = "btn_json_format";
             this.btn_json_format.Size = new System.Drawing.Size(79, 23);
             this.btn_json_format.TabIndex = 3;
@@ -127,7 +146,7 @@
             // 
             // btn_json_compression
             // 
-            this.btn_json_compression.Location = new System.Drawing.Point(259, 12);
+            this.btn_json_compression.Location = new System.Drawing.Point(84, 3);
             this.btn_json_compression.Name = "btn_json_compression";
             this.btn_json_compression.Size = new System.Drawing.Size(75, 23);
             this.btn_json_compression.TabIndex = 4;
@@ -137,17 +156,17 @@
             // 
             // btnImg2Base64
             // 
-            this.btnImg2Base64.Location = new System.Drawing.Point(340, 12);
+            this.btnImg2Base64.Location = new System.Drawing.Point(84, 32);
             this.btnImg2Base64.Name = "btnImg2Base64";
-            this.btnImg2Base64.Size = new System.Drawing.Size(86, 23);
+            this.btnImg2Base64.Size = new System.Drawing.Size(91, 23);
             this.btnImg2Base64.TabIndex = 5;
-            this.btnImg2Base64.Text = "图片2Base64";
+            this.btnImg2Base64.Text = "图片 2 Base64";
             this.btnImg2Base64.UseVisualStyleBackColor = true;
             this.btnImg2Base64.Click += new System.EventHandler(this.btnImg2Base64_Click);
             // 
             // btnToUpper
             // 
-            this.btnToUpper.Location = new System.Drawing.Point(432, 12);
+            this.btnToUpper.Location = new System.Drawing.Point(412, 3);
             this.btnToUpper.Name = "btnToUpper";
             this.btnToUpper.Size = new System.Drawing.Size(75, 23);
             this.btnToUpper.TabIndex = 6;
@@ -157,7 +176,7 @@
             // 
             // btnToLower
             // 
-            this.btnToLower.Location = new System.Drawing.Point(513, 12);
+            this.btnToLower.Location = new System.Drawing.Point(165, 3);
             this.btnToLower.Name = "btnToLower";
             this.btnToLower.Size = new System.Drawing.Size(75, 23);
             this.btnToLower.TabIndex = 7;
@@ -167,7 +186,7 @@
             // 
             // btnDY
             // 
-            this.btnDY.Location = new System.Drawing.Point(0, 0);
+            this.btnDY.Location = new System.Drawing.Point(2, -1);
             this.btnDY.Name = "btnDY";
             this.btnDY.Size = new System.Drawing.Size(26, 23);
             this.btnDY.TabIndex = 8;
@@ -177,7 +196,7 @@
             // 
             // btnSY
             // 
-            this.btnSY.Location = new System.Drawing.Point(32, 0);
+            this.btnSY.Location = new System.Drawing.Point(32, -1);
             this.btnSY.Name = "btnSY";
             this.btnSY.Size = new System.Drawing.Size(26, 23);
             this.btnSY.TabIndex = 9;
@@ -187,7 +206,7 @@
             // 
             // btnDH
             // 
-            this.btnDH.Location = new System.Drawing.Point(64, 0);
+            this.btnDH.Location = new System.Drawing.Point(64, -1);
             this.btnDH.Name = "btnDH";
             this.btnDH.Size = new System.Drawing.Size(26, 23);
             this.btnDH.TabIndex = 10;
@@ -202,9 +221,9 @@
             this.panel1.Controls.Add(this.btnDY);
             this.panel1.Controls.Add(this.btnDH);
             this.panel1.Controls.Add(this.btnSY);
-            this.panel1.Location = new System.Drawing.Point(594, 12);
+            this.panel1.Location = new System.Drawing.Point(493, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(150, 25);
+            this.panel1.Size = new System.Drawing.Size(150, 23);
             this.panel1.TabIndex = 11;
             // 
             // cbxFX
@@ -219,7 +238,7 @@
             // 
             // btnBF
             // 
-            this.btnBF.Location = new System.Drawing.Point(12, 41);
+            this.btnBF.Location = new System.Drawing.Point(3, 32);
             this.btnBF.Name = "btnBF";
             this.btnBF.Size = new System.Drawing.Size(75, 23);
             this.btnBF.TabIndex = 12;
@@ -232,14 +251,21 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.txtGroupCount);
             this.panel2.Controls.Add(this.btnGroup);
-            this.panel2.Location = new System.Drawing.Point(93, 41);
+            this.panel2.Location = new System.Drawing.Point(649, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(143, 25);
+            this.panel2.Size = new System.Drawing.Size(143, 23);
             this.panel2.TabIndex = 13;
+            // 
+            // txtGroupCount
+            // 
+            this.txtGroupCount.Location = new System.Drawing.Point(3, 0);
+            this.txtGroupCount.Name = "txtGroupCount";
+            this.txtGroupCount.Size = new System.Drawing.Size(51, 21);
+            this.txtGroupCount.TabIndex = 14;
             // 
             // btnGroup
             // 
-            this.btnGroup.Location = new System.Drawing.Point(59, 0);
+            this.btnGroup.Location = new System.Drawing.Point(59, -1);
             this.btnGroup.Name = "btnGroup";
             this.btnGroup.Size = new System.Drawing.Size(75, 23);
             this.btnGroup.TabIndex = 14;
@@ -247,37 +273,148 @@
             this.btnGroup.UseVisualStyleBackColor = true;
             this.btnGroup.Click += new System.EventHandler(this.btnGroup_Click);
             // 
-            // txtGroupCount
+            // panel3
             // 
-            this.txtGroupCount.Location = new System.Drawing.Point(3, 1);
-            this.txtGroupCount.Name = "txtGroupCount";
-            this.txtGroupCount.Size = new System.Drawing.Size(51, 21);
-            this.txtGroupCount.TabIndex = 14;
+            this.panel3.Controls.Add(this.btnToUpper);
+            this.panel3.Controls.Add(this.btn_json_format);
+            this.panel3.Controls.Add(this.btn_Sum);
+            this.panel3.Controls.Add(this.panel2);
+            this.panel3.Controls.Add(this.btnImg2Base64);
+            this.panel3.Controls.Add(this.panel1);
+            this.panel3.Controls.Add(this.btnBF);
+            this.panel3.Location = new System.Drawing.Point(12, 70);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(796, 60);
+            this.panel3.TabIndex = 15;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.flowLayoutPanel1);
+            this.panel4.Controls.Add(this.toolStrip1);
+            this.panel4.Controls.Add(this.txtStatus);
+            this.panel4.Controls.Add(this.txt_Main);
+            this.panel4.Location = new System.Drawing.Point(12, 136);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(796, 380);
+            this.panel4.TabIndex = 16;
+            // 
+            // panel5
+            // 
+            this.panel5.Location = new System.Drawing.Point(12, 522);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(796, 32);
+            this.panel5.TabIndex = 16;
             // 
             // txt_Main
             // 
-            this.txt_Main.Location = new System.Drawing.Point(12, 70);
+            this.txt_Main.Location = new System.Drawing.Point(0, 28);
+            this.txt_Main.Multiline = true;
             this.txt_Main.Name = "txt_Main";
-            this.txt_Main.Size = new System.Drawing.Size(780, 333);
-            this.txt_Main.TabIndex = 14;
-            this.txt_Main.Text = "";
+            this.txt_Main.Size = new System.Drawing.Size(796, 325);
+            this.txt_Main.TabIndex = 16;
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Location = new System.Drawing.Point(0, 359);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(796, 21);
+            this.txtStatus.TabIndex = 17;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnQC,
+            this.toolStripSplitButton1,
+            this.toolStripButton2,
+            this.toolStripButton1,
+            this.toolStripButton3,
+            this.toolStripSeparator2,
+            this.toolStripButton4});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(796, 25);
+            this.toolStrip1.TabIndex = 18;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnQC
+            // 
+            this.btnQC.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnQC.Image = ((System.Drawing.Image)(resources.GetObject("btnQC.Image")));
+            this.btnQC.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnQC.Name = "btnQC";
+            this.btnQC.Size = new System.Drawing.Size(36, 22);
+            this.btnQC.Text = "去重";
+            this.btnQC.ToolTipText = "toolStrip1Button1";
+            this.btnQC.Click += new System.EventHandler(this.btnQC_Click);
+            // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(144, 22);
+            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btn_Deduplication);
+            this.flowLayoutPanel1.Controls.Add(this.btn_json_compression);
+            this.flowLayoutPanel1.Controls.Add(this.btnToLower);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(384, 136);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(320, 100);
+            this.flowLayoutPanel1.TabIndex = 19;
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(107, 22);
+            this.toolStripButton2.Text = "toolStripButton2";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(107, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(107, 22);
+            this.toolStripButton3.Text = "toolStripButton3";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton4.Text = "toolStripButton4";
             // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 415);
-            this.Controls.Add(this.txt_Main);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.btnBF);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnToLower);
-            this.Controls.Add(this.btnToUpper);
-            this.Controls.Add(this.btnImg2Base64);
-            this.Controls.Add(this.btn_json_compression);
-            this.Controls.Add(this.btn_json_format);
-            this.Controls.Add(this.btn_Sum);
-            this.Controls.Add(this.btn_Deduplication);
+            this.ClientSize = new System.Drawing.Size(820, 559);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
             this.Name = "Main_Form";
             this.Text = "YTool";
             this.SizeChanged += new System.EventHandler(this.Main_Form_SizeChanged);
@@ -286,6 +423,12 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -312,7 +455,20 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnGroup;
         private System.Windows.Forms.TextBox txtGroupCount;
-        private System.Windows.Forms.RichTextBox txt_Main;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.TextBox txt_Main;
+        private System.Windows.Forms.TextBox txtStatus;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton btnQC;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
     }
 }
 
