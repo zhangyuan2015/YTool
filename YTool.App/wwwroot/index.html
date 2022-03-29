@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>YTool.App</title>
     <base href="/" />
-    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    
+    <!--<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />-->
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="_content/BootstrapBlazor/css/bootstrap.blazor.bundle.min.css" rel="stylesheet">
+
     <link href="css/app.css" rel="stylesheet" />
     <link href="YTool.App.styles.css" rel="stylesheet" />
     <link href="manifest.json" rel="manifest" />
@@ -22,11 +27,11 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+
+    <script src="_content/BootstrapBlazor/js/bootstrap.blazor.bundle.min.js"></script>
+
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
 </body>
 
 </html>
-
-<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="script/index.js"></script>

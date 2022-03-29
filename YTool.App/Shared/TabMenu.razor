@@ -1,0 +1,24 @@
+﻿<Menu Items="@Items" DisableNavigation="false" />
+
+@code {
+    private IEnumerable<MenuItem> Items { get; set; }
+
+    /// <summary>
+    /// OnInitialized 方法
+    /// </summary>
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        Items = new[] {
+            new MenuItem { Text = "首页", Url="/YTool/" },
+            new MenuItem { Text = "文本工具", Url="/YTool/TextTool" },
+            new MenuItem { Text = "Json工具", Url="/YTool/JsonTool" }
+        };
+    }
+
+    private Task OnClickMenu(MenuItem item)
+    {
+        //Trace.Log($"菜单点击项: {item.Text}");
+        return Task.CompletedTask;
+    }
+}

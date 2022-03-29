@@ -1,9 +1,40 @@
-﻿@page "/json"
+﻿@page "/YTool/JsonTool"
+@using YTool.Interface
+@inject IJsonInterface _jsonInterface
 
-<PageTitle>JSON 工具</PageTitle>
+<PageTitle>Json工具</PageTitle>
+<div class="card-body">
+    <div class="row g-3">
+        <div class="col-6 col-sm-4 col-md-3 col-lg-auto"><Button Size="Size.Small" OnClick="@Format" Color="Color.Primary">格式化</Button></div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-auto"><Button Size="Size.Small" OnClick="@Compression" Color="Color.Primary">压缩</Button></div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="row g-3">
+        <div class="col-12">
+            <Textarea placeholder="请输入 ..." rows="32" @bind-Value="@Text"></Textarea>
+        </div>
+    </div>
+</div>
+@code {
 
-<h1>Hello, world!</h1>
+    string Text { get; set; }
 
-Welcome to your new app.
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private void Format(MouseEventArgs e)
+    {
+        Text = _jsonInterface.Format(Text);
+    }
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private void Compression(MouseEventArgs e)
+    {
+        Text = _jsonInterface.Compression(Text);
+    }
+}

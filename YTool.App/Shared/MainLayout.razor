@@ -1,14 +1,34 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class=""></div>
-    <main>
-        <div class="top-row px-4">
-            <TapMenu />
-        </div>
+@*<div class="page">
+    <div class="sidebar">
+    <NavMenu />
+    </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
+    <main>
+    <div class="top-row px-4">
+    <TapMenu />
+    </div>
+
+    <article class="content px-4">
+    @Body
+    </article>
     </main>
-</div>
+    </div>*@
+
+
+<Layout ShowFooter="true">
+    <Header>
+        <div class="text-center header">
+            <TabMenu />
+        </div>
+    </Header>
+    <Main>
+        <div class="text-center main">
+            @Body
+        </div>
+    </Main>
+    <Footer>
+        <div class="text-center footer">zhangyuan.net</div>
+    </Footer>
+</Layout>
