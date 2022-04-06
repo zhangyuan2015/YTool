@@ -5,27 +5,27 @@
 <PageTitle>文本工具</PageTitle>
 <div class="card-body">
     <div class="row g-3">
-        <div class="col-6 col-sm-4 col-md-3 col-lg-auto"><Button Size="Size.Small" OnClick="@RemoveDuplicate" Color="Color.Primary">去重</Button></div>
-        <div class="col-6 col-sm-4 col-md-3 col-lg-auto"><Button Size="Size.Small" OnClick="@ToUpper" Color="Color.Primary">转大写</Button></div>
-        <div class="col-6 col-sm-4 col-md-3 col-lg-auto"><Button Size="Size.Small" OnClick="@ToLower" Color="Color.Primary">转小写</Button></div>
+        <div class="col-1 col-lg-auto"><Button Size="Size.Small" OnClick="@RemoveDuplicate" Color="Color.Primary">去重</Button></div>
+        <div class="col-1 col-lg-auto"><Button Size="Size.Small" OnClick="@ToUpper" Color="Color.Primary">转大写</Button></div>
+        <div class="col-1 col-lg-auto"><Button Size="Size.Small" OnClick="@ToLower" Color="Color.Primary">转小写</Button></div>
 
-        <div class="btn-group col-6 col-sm-4 col-md-3 col-lg-auto" role="group">
+        <div class="btn-group col-1 col-lg-auto" role="group">
             <Button Size="Size.Small" OnClick="@AddDoubleQuotes" Color="Color.Primary">"&nbsp;&nbsp;"&nbsp;&nbsp;<Checkbox DisplayText="去除" Color="Color.Primary" @bind-Value="@IsReverse" style="float: right;"></Checkbox></Button>
         </div>
 
-        <div class="btn-group col-6 col-sm-4 col-md-3 col-lg-auto" role="group">
+        <div class="btn-group col-1 col-lg-auto" role="group">
             <Button Size="Size.Small" OnClick="@AddSingleQuotes" Color="Color.Primary">'&nbsp;&nbsp;'&nbsp;&nbsp;<Checkbox DisplayText="去除" Color="Color.Primary" @bind-Value="@IsReverse" style="float: right;"></Checkbox></Button>
         </div>
 
-        <div class="btn-group col-6 col-sm-4 col-md-3 col-lg-auto" role="group">
+        <div class="btn-group col-1 col-lg-auto" role="group">
             <Button Size="Size.Small" OnClick="@AddComma" Color="Color.Primary">&nbsp;&nbsp;,&nbsp;&nbsp;<Checkbox DisplayText="去除" Color="Color.Primary" @bind-Value="@IsReverse" style="float: right;"></Checkbox></Button>
         </div>
 
-        <div class="col-6 col-sm-4 col-md-3 col-lg-auto">
-        <div class="btn-group" role="group">
-            <BootstrapInput len @bind-Value="@GroupCount" style="width:60px;" />
-            <Button Size="Size.Small" OnClick="@Group" Color="Color.Primary">分组</Button>
-        </div>
+        <div class="col-1 col-lg-auto">
+            <div class="btn-group" role="group">
+                <BootstrapInput @bind-Value="@GroupCount" style="width:60px;" />
+                <Button Size="Size.Small" OnClick="@Group" Color="Color.Primary">分组</Button>
+            </div>
         </div>
     </div>
 </div>
@@ -97,7 +97,7 @@
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="e"></param>
     private void Group(MouseEventArgs e)

@@ -1,0 +1,63 @@
+﻿@page "/YTool/ImageTool"
+@using System.ComponentModel.DataAnnotations
+@using System.Text
+@using YTool.Interface
+@inject IImageInterface _imageInterface
+
+<PageTitle>图片工具</PageTitle>
+<div class="card-body">
+    <div class="row g-3">
+        <div class="col-12 col-lg-auto">
+            <InputUpload @bind-Value="@Picture" ></InputUpload>
+        </div>
+    </div>
+    <div class="row g-3 mt-1">
+        <div class="col-1 col-lg-auto"><Button Size="Size.Small" OnClick="@ImageToBase64" Color="Color.Primary">图片转Base64</Button></div>
+        <div class="col-1 col-lg-auto"><Button Size="Size.Small" OnClick="@Base64ToImage" Color="Color.Primary">Base64转图片</Button></div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="row g-3">
+        <div class="col-12">
+            <Textarea placeholder="请输入 ..." rows="32" @bind-Value="@Text"></Textarea>
+        </div>
+    </div>
+</div>
+@code {
+
+    string Text { get; set; }
+
+    [Required]
+    [FileValidation(Extensions = new string[] { ".png", ".jpg", ".jpeg" }, FileSize = 50 * 1024)]
+    public IBrowserFile? Picture { get; set; }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private void Base64ToImage(MouseEventArgs e)
+    {
+        Text = _imageInterface.Base64ToImage(Text);
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private async void ImageToBase64(MouseEventArgs e)
+    {
+        Text = "Start";
+
+        var ret = await UPL();
+
+        Text = ret;
+    }
+
+    private async Task<string> UPL()
+    {
+        MemoryStream ms = new MemoryStream();
+        await Picture.OpenReadStream().CopyToAsync(ms);
+        var bytes = ms.ToArray();
+        return Convert.ToBase64String(bytes);
+    }
+}
