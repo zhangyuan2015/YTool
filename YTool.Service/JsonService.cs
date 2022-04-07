@@ -16,6 +16,26 @@ namespace YTool.Service
             return JsonWriter(text, Formatting.None);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public string AddEscape(string text)
+        {
+            return text.Replace("\"", "\\\"");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public string RemoveEscape(string text)
+        {
+            return text.Replace("\\\"", "\"");
+        }
+        
         private string JsonWriter(string text, Formatting formatting)
         {
             if (string.IsNullOrWhiteSpace(text))

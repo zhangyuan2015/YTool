@@ -12,6 +12,7 @@ builder.Services.AddBootstrapBlazor();
 
 builder.Services.AddScoped<ITextInterface, TextService>();
 builder.Services.AddScoped<IJsonInterface, JsonService>();
+builder.Services.AddScoped<IImageInterface, ImageService>();
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
