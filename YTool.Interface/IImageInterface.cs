@@ -5,9 +5,9 @@
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="bytes"></param>
         /// <returns></returns>
-        string ImageToBase64(string text);
+        string ImageToBase64(byte[] bytes);
 
         /// <summary>
         /// 

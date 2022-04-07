@@ -2,24 +2,23 @@
 @using System.ComponentModel.DataAnnotations
 @using System.Text
 @using YTool.Interface
+@using static System.Net.Mime.MediaTypeNames
 @inject IImageInterface _imageInterface
 
 <PageTitle>图片工具</PageTitle>
 <div class="card-body">
     <div class="row g-3">
-        <div class="col-12 col-lg-auto">
-            <InputUpload @bind-Value="@Picture" ></InputUpload>
+        <div class="col-3 col-lg-auto">
+            <CardUpload Id="cul" TValue="string" Accept="image/*" IsSingle="true" DefaultFileList="@Base64FormatFileList" OnChange="@OnCardUpload" OnDelete="@OnCardDelete" OnZoomAsync="@OnZoom"></CardUpload>
         </div>
-    </div>
-    <div class="row g-3 mt-1">
-        <div class="col-1 col-lg-auto"><Button Size="Size.Small" OnClick="@ImageToBase64" Color="Color.Primary">图片转Base64</Button></div>
-        <div class="col-1 col-lg-auto"><Button Size="Size.Small" OnClick="@Base64ToImage" Color="Color.Primary">Base64转图片</Button></div>
+        <div class="col-1 col-lg-auto"><Button Size="Size.Small" Icon="fa fa-exchange" OnClick="@ImageToBase64" Color="Color.Primary" Text="图片转Base64" IsAsync="true" /></div>
+        <div class="col-1 col-lg-auto"><Button Size="Size.Small" Icon="fa fa-exchange" OnClick="@Base64ToImage" Color="Color.Primary" Text="Base64转图片" /></div>
     </div>
 </div>
 <div class="card-body">
     <div class="row g-3">
         <div class="col-12">
-            <Textarea placeholder="请输入 ..." rows="32" @bind-Value="@Text"></Textarea>
+            <Textarea Id="txaText" placeholder="请输入 ..." rows="32" @bind-Value="@Text"></Textarea>
         </div>
     </div>
 </div>
@@ -27,37 +26,109 @@
 
     string Text { get; set; }
 
-    [Required]
-    [FileValidation(Extensions = new string[] { ".png", ".jpg", ".jpeg" }, FileSize = 50 * 1024)]
-    public IBrowserFile? Picture { get; set; }
+    public IBrowserFile Picture { get; set; }
+
+    [Inject]
+    public MessageService? MessageService { get; set; }
+
+    private static long MaxFileLengthMB => 10;
+    private static long MaxFileLength => MaxFileLengthMB * 1024 * 1024;
+
+    private CancellationTokenSource? ReadImageToken { get; set; }
+
+    private List<UploadFile> Base64FormatFileList { get; } = new List<UploadFile>()
+    {
+        //new UploadFile { FileName = "Test", PrevUrl = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAkCAYAAAD/yagrAAAE60lEQVR4AWJwL/AB9GIWvI0jURz/L1NomZmZP8p9kWNmhnIbKPdomZmZGcJgO7QsWMbce55Yl11t47FbVdKTYpjOr/+H4y4Z/MpYeJVV8KVvokFRylq9osKfVtGQ/NHyPl2CbNVGwau2oOlmgUDJtDJGzxtvvIA3vRH+7IgeA0VtYhQBtKPlToFgC6RY58aggfwLNKhr0Zry2NnPrpIM2YGW2+UBG1IEmdGVJEVXE+hQXt8joKhLjdGVZHd7TSD9DHmT3J1dheroSF4fhnvUVQwbZx9UOnHSzQjkTN0tIG+8hFdbxet4PQOG4WqJwN1hFVb+xUBmCblxvxRkIE+Q+Yf0T31NSrp4/RV4FhHgoSTchQRZBK4D1+Fe2q2g8CYXU6buQyNDaiZKZhn0IYXHVwbkRQydHyawOAGGisa/o3DvI/jF3QKKiuAy+LKs5CvaXMLdeXb35wbkKTjmReDZHysCBosWJqN7r0jZ/VfgXtIlUNQnVpK7D4nNJSC5BHGi1d108Ppr8MxlF0cJqBSyFJaUfUnvHLyO4cttgaI+NhGB7HE0MaSUks/gU5vwe1gv5tfhmUmAhxME8jbIUtiEDus+fhmDJlgCRY0ylZRZhybKWtNinmYlH9NvL5puO3m9UHOkgzb3xuF5HCkDyhYiSwrYVfQPTpYChTc+E35tG9VJBjGFFNmtVlNMDnjzbx0EBpKq1eTeh2awbArBRuHadBWu6WVB4U/NITfuobYoCZl7QL//wDtr+nTmsgzQh2Kwgtz7QAZWFeGw/RI8s94Kigp1PvzZg2i9x11FDtKn/oZCoZdZxhaAXmG4/ohJKHudLE1Gyu66DOfs10BRR5CU3TKQIrtzj9BAkF991dsMslTZEClLsI+jFmANZYFAdAJl9QG03jWH9GrcFh9QTP4Of6GfJGSpsv1J2aoEKRuWCANNJNqOFAaPAW36rVRMCjVf6ZCtqYF2p6Asxg5mWK6tQamY9RCs8z1wF+FxTR5UqYT/3GC7oCkMHcjxKguq6cnl+Egf2whip3C9Yu56jk+GXXOtv1XIa8L1f3AFkHe9az83AmNanwV/bhfa5JKJ3n1slCUL8dk7CNfvVFMfySRThoxbK7fh18tTZXI2QeySLk88IRGsbHkqQj6wUJ72G5CloCXKZrdbLPgVMgVfQMq5m97bfQWOOeVbaK02nSA2ofn2y662UJE47horLZTe38oDjdxQUhmawocxa0OJ5hXjnZE4w1y0uc/iULKGfk+xNuZxI/BnjhFs+THPq4phmTsbeYPXRjFsJJ+NSMlnInHkxrwzGDjR3uBcG1/B/b/TwZkhubb6tP2oVfTAD2G4kw9vYiA2h+zy4GwYxd7S4qGOgd6oqVn6re1DTXiO4e4wPF+yQlF4ZCBfheSPIjJn+ciS/w93qjA6aZYqeQ5D3dTqvuE6GZNTkov5vqsYvLh7j8u1sWWkLIdBQR+q+XdtaKGhJCWBDpkwgSw9gRpKyoNKw6rjCLCDP4yVflSgWFwt3C0HSUo2BTFYX28fVAaWPpDx7wtwjOSSUszawnUT0KTudlfrFQwZ3WNf867CNZQhk/C8kIFUhJLt/O3Jzn62IYNwrUvA8zws4W61CGlDSfugXMz5pJgiSFYyXMYiRXdH4GmyqaR9UHLxzxG41KAwpZxRPN4kRf85Z5I4MvYfFUFGfemJG40AAAAASUVORK5CYII=" },
+    };
 
     /// <summary>
     ///
     /// </summary>
     /// <param name="e"></param>
-    private void Base64ToImage(MouseEventArgs e)
+    private async Task Base64ToImage(MouseEventArgs e)
     {
-        Text = _imageInterface.Base64ToImage(Text);
+        if (string.IsNullOrEmpty(Text))
+        {
+            await MessageService.Show(new MessageOption()
+                {
+                    Content = "请输入Base64字符",
+                    Icon = "fa fa-info-circle",
+                    Color = Color.Danger,
+                    ShowDismiss = true,
+                });
+            return;
+        }
+
+        Base64FormatFileList.Add(new UploadFile { PrevUrl = $"data:image/png;base64,{Text}", Size = Text.Length });
     }
 
     /// <summary>
     ///
     /// </summary>
     /// <param name="e"></param>
-    private async void ImageToBase64(MouseEventArgs e)
+    private async Task ImageToBase64(MouseEventArgs e)
     {
-        Text = "Start";
+        Text = "";
+        if (Picture == null)
+        {
+            await MessageService.Show(new MessageOption()
+                {
+                    Content = "请选择图片",
+                    Icon = "fa fa-info-circle",
+                    Color = Color.Danger,
+                    ShowDismiss = true,
+                });
+            return;
+        }
 
-        var ret = await UPL();
-
-        Text = ret;
-    }
-
-    private async Task<string> UPL()
-    {
         MemoryStream ms = new MemoryStream();
-        await Picture.OpenReadStream().CopyToAsync(ms);
+        await Picture.OpenReadStream(MaxFileLength, ReadImageToken.Token).CopyToAsync(ms);
         var bytes = ms.ToArray();
-        return Convert.ToBase64String(bytes);
+        Text = _imageInterface.ImageToBase64(bytes);
+    }
+
+    private async Task OnCardUpload(UploadFile file)
+    {
+        if (file != null && file.File != null)
+        {
+            if (file.Size > MaxFileLength)
+            {
+                await MessageService.Show(new MessageOption()
+                    {
+                        Content = $"图片超出大小限制 {MaxFileLengthMB}MB",
+                        Icon = "fa fa-info-circle",
+                        Color = Color.Danger,
+                        ShowDismiss = true,
+                    });
+                file.Code = 1;
+                file.Error = $"图片超出大小限制 {MaxFileLengthMB}MB";
+                return;
+            }
+            else
+            {
+                Picture = file.File;
+
+                var format = file.File.ContentType;
+                ReadImageToken ??= new CancellationTokenSource();
+                if (ReadImageToken.IsCancellationRequested)
+                {
+                    ReadImageToken.Dispose();
+                    ReadImageToken = new CancellationTokenSource();
+                }
+                await file.RequestBase64ImageFileAsync(format, 640, 480, MaxFileLength, ReadImageToken.Token);
+            }
+        }
+    }
+
+    private Task<bool> OnCardDelete(UploadFile file)
+    {
+        file = null;
+        Picture = null;
+        return Task.FromResult(true);
+    }
+
+    private Task<bool> OnZoom(UploadFile file)
+    {
+        throw new NotSupportedException();
     }
 }

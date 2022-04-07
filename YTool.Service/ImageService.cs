@@ -9,9 +9,14 @@ namespace YTool.Service
             return "";
         }
 
-        public string ImageToBase64(string text)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public string ImageToBase64(byte[] bytes)
         {
-            return "";
+            return Convert.ToBase64String(bytes);
         }
     }
 }
