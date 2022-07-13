@@ -21,11 +21,13 @@ jobs:
       run: ls
     - name: cd YTool.App
       run: cd YTool.App 
+    - name: ls
+      run: ls
     - name: Restore dependencies
       run: dotnet restore
+    - name: ls
+      run: ls
     - name: cd YTool.App
       run: cd YTool.App 
-    - name: Build
-      run: dotnet build YTool.App.csproj --no-restore
-    - name: dotnet publish #发布项目
-      run: dotnet publish YTool/YTool.App --configuration -c Release --no-restore -o YTool/YTool.App/publish
+    - name: ls
+      run: ls
