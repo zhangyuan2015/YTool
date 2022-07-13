@@ -15,6 +15,6 @@ jobs:
     - name: ls
       run: ls
     - name: cd YTool.App
-      run: cd \YTool.App;ls
+      run: cd //YTool.App
     - name: ls
       run: ls
