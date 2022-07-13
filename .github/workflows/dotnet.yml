@@ -19,11 +19,13 @@ jobs:
         dotnet-version: 6.0.x
     - name: ls
       run: ls
-    - name: cd YTool.App
-      run: cd YTool.App
     - name: Restore dependencies
-      run: dotnet restore
+      run: 
+       cd YTool.App
+       dotnet restore
     - name: Build
-      run: dotnet build YTool.App.csproj --no-restore
+      run: 
+       cd YTool.App
+       dotnet build YTool.App.csproj --no-restore
     - name: dotnet publish #发布项目
       run: dotnet publish YTool/YTool.App --configuration -c Release --no-restore -o YTool/YTool.App/publish
