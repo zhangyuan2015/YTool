@@ -24,6 +24,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build YTool.App.csproj --no-restore
     - name: dotnet publish #发布项目
       run: dotnet publish YTool/YTool.App --configuration -c Release --no-restore -o YTool/YTool.App/publish
