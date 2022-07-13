@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: ls
+      run: ls
     - name: cd YTool.App
       run: cd YTool.App
     - uses: actions/checkout@v3
