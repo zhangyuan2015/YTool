@@ -22,4 +22,4 @@ jobs:
     - name: Build
       run: dotnet build YTool.App --no-restore
     - name: dotnet publish YTool.App
-      run: dotnet publish YTool.App --configuration -c Release --no-restore -o publish
+      run: dotnet publish YTool.App -c Release --no-restore -o YTool.App/publish
