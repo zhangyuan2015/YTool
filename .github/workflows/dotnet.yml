@@ -10,7 +10,7 @@ jobs:
   build:
     defaults:
       run:
-        working-directory: YTool.App
+        working-directory: /home/runner/work/YTool/YTool.App
     runs-on: ubuntu-latest
     steps:
     - name: ls
