@@ -24,7 +24,7 @@ jobs:
     - name: dotnet publish YTool.App
       run: dotnet publish YTool.App -c Release --no-restore -o YTool.App/publish
     - name: copy file to txy
-    - uses: appleboy/scp-action@master
+      uses: appleboy/scp-action@master
       with:
        source: 'YTool.App/publish/*'
        host: ${{ secrets.TXY_HOST }}
