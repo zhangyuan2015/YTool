@@ -8,13 +8,10 @@ on:
 
 jobs:
   build:
-
+    defaults:
+      run:
+        working-directory: ./YTool.App
     runs-on: ubuntu-latest
-
     steps:
-    - name: ls
-      run: ls
-    - name: cd YTool.App
-      run: cd YTool.App
     - name: ls
       run: ls
