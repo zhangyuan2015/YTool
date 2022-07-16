@@ -13,4 +13,4 @@ jobs:
 
     steps:
     - name: test ping host
-      run: ping ${{ secrets.TXY_HOST }} -c 5
+      run: ping 42.193.185.214 -c 5
