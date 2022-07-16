@@ -13,4 +13,4 @@ jobs:
 
     steps:
     - name: test ping host
-      run: ping www.baidu.com -c 5
+      run: ping 20.205.243.166 -c 5
