@@ -9,17 +9,8 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore YTool.App
-    - name: Build
-      run: dotnet build YTool.App --no-restore
-    - name: dotnet publish YTool.App
-      run: dotnet publish YTool.App -c Release --no-restore -o YTool.App/publish
+    - name: test ping host
+      run: ping 20.205.243.166 -c 5
