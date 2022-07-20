@@ -13,24 +13,33 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
        dotnet-version: 6.0.x
+       
     - name: Restore dependencies
       run: dotnet restore YTool.App
+      
     - name: Build
       run: dotnet build YTool.App --no-restore
-    - name: dotnet publish YTool.App
+      
+    - name: Publish
       run: dotnet publish YTool.App -c Release --no-restore -o YTool.App/publish
-    - name: test ping host
-      run: ping ${{ secrets.TXY_HOST }}  -c 5
-    - name: copy file to txy
-      uses: appleboy/scp-action@master
+      
+    - name: Zip the Build
+      run: zip -r YTool.App.zip YTool.App/publish/
+      
+    - name: Create Release and Upload Release Asset
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
       with:
-       source: 'YTool.App/publish/*'
-       host: ${{ secrets.TXY_HOST }}
-       target: "/home/nginx-pord/html/YTool"
-       port: 22
-       username: ${{ secrets.TXY_LOGINNAME }}
-       password: ${{ secrets.TXY_PASSWORD }}
+        tag_name: ${{ github.ref }}
+        name: Release ${{ github.ref }}
+        body: TODO New Release.
+        draft: false
+        prerelease: false
+        files: |
+          YTool.App.zip
+          LICENSE 
