@@ -3,6 +3,8 @@ name: YTool.NET
 on:
   push:
     branches: [ "test" ]
+    tags:
+      - '*'
   pull_request:
     branches: [ "test" ]
 
