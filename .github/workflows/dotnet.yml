@@ -13,12 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Show C Token
-      run: echo ${{ secrets.C_GITHUB_TOKEN }}
-      
-    - name: Show Token
-      run: echo ${{ secrets.GITHUB_TOKEN }}
-      
+
     - name: Create Tag
       id: create_tag 
       uses: jaywcjlove/create-tag-action@v1.3.8
@@ -31,7 +26,7 @@ jobs:
       uses: jaywcjlove/changelog-generator@main
       if: steps.create_tag.outputs.successful
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.C_GITHUB_TOKEN }}
         filter: '[P|p]ublish:[v|V]\d(\.\d+){0,2}'
       
     - name: Show Changelog
@@ -42,7 +37,7 @@ jobs:
       uses: ncipollo/release-action@v1
       if: steps.create_tag.outputs.successful
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.C_GITHUB_TOKEN }}
         name: ${{ steps.create_tag.outputs.version }}
         tag: ${{ steps.create_tag.outputs.version }}
         body: |
@@ -56,7 +51,7 @@ jobs:
       uses: actions/upload-release-asset@v1.0.1
       if: steps.create_tag.outputs.successful
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.C_GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./YTool.App.zip
