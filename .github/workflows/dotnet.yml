@@ -18,6 +18,7 @@ jobs:
       id: create_tag 
       uses: jaywcjlove/create-tag-action@v1.3.8
       with:
+        release: true
         token: ${{ secrets.C_GITHUB_TOKEN }}
         test: '[P|p]ublish:[v|V]\d(\.\d+){0,2}'
       
