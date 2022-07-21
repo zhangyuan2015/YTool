@@ -12,22 +12,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-       dotnet-version: 6.0.x
-       
-    - name: Restore dependencies
-      run: dotnet restore YTool.App
-
-    - name: Publish
-      run: dotnet publish YTool.App -c Release --no-restore -o YTool.App/publish
-      
-    - name: Zip
-      run: zip -r YTool.App.zip YTool.App/publish/
-      
     - name: Set selected color
       run: echo '::set-output name=SELECTED_COLOR::green'
       id: random-color-generator
@@ -35,7 +19,7 @@ jobs:
       run: echo "The selected color is ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}"
     
     - name: Show Last tag1
-      run: echo git tag -n --sort=-taggerdate | head -n 1
+      run: git tag -n --sort=-taggerdate | head -n 1
     
     - name: Last tag
       id: Last_tag
