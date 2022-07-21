@@ -29,19 +29,27 @@ jobs:
     - name: Zip
       run: zip -r YTool.App.zip YTool.App/publish/
       
+    - name: Create Tag
+      id: create_tag
+      uses: jaywcjlove/create-tag-action@main
+      with:
+        test: '[P|p]ublish:[v|V]\d(\.\d+){0,2}'
+      
     - name: Generate Changelog
       id: changelog
       uses: jaywcjlove/changelog-generator@main
+      if: steps.create_tag.outputs.successful
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         filter: '[P|p]ublish:[v|V]\d(\.\d+){0,2}'
       
     - name: Show Changelog
+      if: steps.create_tag.outputs.successful
       run: echo "${{ steps.changelog.outputs.changelog }}"
 
     - name: Create Release
-      id: create_tag
       uses: ncipollo/release-action@v1
+      if: steps.create_tag.outputs.successful
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         name: ${{ steps.create_tag.outputs.version }}
