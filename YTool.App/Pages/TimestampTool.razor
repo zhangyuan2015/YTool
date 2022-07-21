@@ -7,13 +7,28 @@
 <div class="card-body">
     <div class="row g-3">
         <div class="col-auto col-form-label">
-            <span>当前时间戳：</span>
+            当前时间：
         </div>
-        <div class="col-3">
+        <div class="col-2">
+            <BootstrapInput @bind-Value="@CurrentTime" style="width:auto;" />
+        </div>
+        <div class="col-auto col-form-label">
+            当前时间戳：
+        </div>
+        <div class="col-2">
             <BootstrapInput @bind-Value="@CurrentTimestamp" style="width:auto;" />
         </div>
-        <div class="col-3">
-            <RadioList TValue="string" Items="@ConvertTypes" @bind-bind-Value="@ConvertType"></RadioList>
+        <div class="col-auto col-form-label">
+            <span>当前时区：</span>
+        </div>
+        <div class="col-1">
+            <BootstrapInput @bind-Value="@Timezone"/>
+        </div>
+        <div class="col-2">
+            <RadioList TValue="string" Items="@ConvertTypes" OnSelectedChanged="@OnConvertTypeChanged"></RadioList>
+        </div>
+        <div class="col-1">
+            <Button Size="Size.Small" OnClick="@OnStart" Color="Color.Primary">@StartBtnText</Button>
         </div>
     </div>
 </div>
@@ -22,68 +37,132 @@
         <div class="col-auto col-form-label">
             <span>时间戳转换：</span>
         </div>
-        <div class="col-3">
+        <div class="col-2">
             <BootstrapInput @bind-Value="@Timestamp" style="width:auto;" />
         </div>
         <div class="col-auto col-form-label">
             <span>日期时间转换：</span>
         </div>
-        <div class="col-3">
-            <BootstrapInput @bind-Value="@TimeText" style="width:auto;" />
+        <div class="col-2">
+            <BootstrapInput @bind-Value="@TimeText" FormatString="yyyy-MM-dd HH:mm:ss.fff" style="width:auto;" />
+        </div>
+        <div class="col-1">
+            <Button Size="Size.Small" OnClick="@OnConvert" Color="Color.Primary">转换</Button>
         </div>
     </div>
 </div>
 @code {
-    long Timestamp { get; set; }
-    string TimeText { get; set; }
-    long CurrentTimestamp { get; set; }
-    static System.Timers.Timer timer;
-    private string ConvertType { get; set; }
+    long? Timestamp { get; set; }
+    string? TimeText { get; set; }
+    int? Timezone { get; set; } = GetTimeZone();
+    string? CurrentTime{ get; set; }
+    long? CurrentTimestamp { get; set; }
+    static System.Timers.Timer? timer;
+    private bool ConvertTypeIsSecond  = true;
+    private bool IsStart = true;
+    private string StartBtnText = "停止";
     private List<SelectedItem> ConvertTypes { get; set; }
+    private string DateTimeFormatSecond = "yyyy-MM-dd HH:mm:ss";
+    private string DateTimeFormatMillisecond = "yyyy-MM-dd HH:mm:ss.fff";
+    private double interval = 500;
+
+    private static class TimestampType
+    {
+        public static string Second = "秒";
+        public static string Millisecond = "毫秒";
+    }
+
+    private void GetStartBtnText()
+    {
+        StartBtnText = IsStart ? "停止" : "开始";
+    }
+
+    private static int GetTimeZone()
+    {
+        return TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours;
+    }
+
+    private void OnStart(MouseEventArgs e)
+    {
+        IsStart = !IsStart;
+        if (IsStart)
+            timer?.Start();
+        else
+            timer?.Stop();
+        GetStartBtnText();
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private void OnConvert(MouseEventArgs e)
+    {
+        if (Timestamp.HasValue && Timestamp.Value > 0)
+        {
+            DateTimeOffset dto = ConvertTypeIsSecond ? DateTimeOffset.FromUnixTimeSeconds(Timestamp.Value) : DateTimeOffset.FromUnixTimeMilliseconds(Timestamp.Value);
+            TimeText = dto.LocalDateTime.ToString(DateTimeFormatMillisecond);
+        }
+        else if (!string.IsNullOrWhiteSpace(TimeText))
+        {
+            DateTimeOffset.TryParse(TimeText, out DateTimeOffset dto);
+            Timestamp = GetTimestamp(dto);
+        }
+    }
+
+    private Task OnConvertTypeChanged(IEnumerable<SelectedItem> values, string val)
+    {
+        ConvertTypeIsSecond = values.FirstOrDefault()?.Value?.Equals(TimestampType.Second) ?? false;
+        if (ConvertTypeIsSecond)
+            interval = 500;
+        else
+            interval = 5;
+
+        SetCurrentTime();
+
+        timer.Interval = interval;
+        if (IsStart)
+            timer?.Start();
+        else
+            timer?.Stop();
+
+        return Task.CompletedTask;
+    }
+
+    private long GetCurrentTimestamp()
+    {
+        return GetTimestamp(DateTimeOffset.Now);
+    }
+
+    private long GetTimestamp(DateTimeOffset dto)
+    {
+        return ConvertTypeIsSecond ? dto.ToUnixTimeSeconds() : dto.ToUnixTimeMilliseconds();
+    }
 
     public TimestampTool()
     {
-        CurrentTimestamp = (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
-
+        CurrentTimestamp = GetCurrentTimestamp();
         ConvertTypes = new List<SelectedItem>(2)
         {
-            new SelectedItem("Second", "秒"),
-            new SelectedItem("Millisecond", "毫秒"),
+            new SelectedItem(TimestampType.Second, TimestampType.Second),
+            new SelectedItem(TimestampType.Millisecond, TimestampType.Millisecond)
         };
 
-        timer = new System.Timers.Timer(1000);
+        timer = new System.Timers.Timer(interval);
         timer.Elapsed += SetCurrentTimestamp;//到达时间的时候执行事件；
         timer.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
         timer.Start(); //启动定时器    
     }
 
-    private void TimeTextEnterEvent()
+    private void SetCurrentTimestamp(object? source, System.Timers.ElapsedEventArgs e)
     {
-
+        SetCurrentTime();   
     }
 
-    private void TimestampEnterEvent()
+    private void SetCurrentTime()
     {
-
-    }
-
-    private void SetCurrentTimestamp(object source, System.Timers.ElapsedEventArgs e)
-    {
-        CurrentTimestamp = (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
+        CurrentTimestamp = GetCurrentTimestamp();
+        CurrentTime = DateTimeOffset.Now.LocalDateTime.ToString(ConvertTypeIsSecond ? DateTimeFormatSecond : DateTimeFormatMillisecond);
         InvokeAsync(StateHasChanged);
-    }
-
-    private DateTime StampToDateTime(long timeStamp)
-    {
-        DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-        long mTime = long.Parse(timeStamp + "0000");
-        TimeSpan toNow = new TimeSpan(mTime);
-        return startTime.Add(toNow);
-    }
-
-    private long DateTimeToStamp(DateTime dateTime)
-    {
-        TimeSpan timeSpan = dateTime - new DateTime(1970, 1, 1);
-        return (long)timeSpan.TotalMilliseconds;
     }
 }
