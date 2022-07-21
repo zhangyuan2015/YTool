@@ -39,7 +39,7 @@ jobs:
     
     - name: Last tag
       id: Last_tag
-      run: echo '::set-output name=TAG_NAME::git tag -n --sort=-taggerdate | head -n 1
+      run: echo '::set-output name=TAG_NAME::git tag -n --sort=-taggerdate | head -n 1'
       
     - name: Show Last tag2
       run: echo ${{ steps.Last_tag.outputs.TAG_NAME }}
