@@ -44,6 +44,7 @@ jobs:
       run: echo "${{ steps.changelog.outputs.changelog }}"
 
     - name: Create Release
+      id: create_release
       uses: ncipollo/release-action@v1
       if: steps.create_tag.outputs.successful
       with:
@@ -55,7 +56,7 @@ jobs:
 
           ${{ steps.changelog.outputs.changelog }}
 
-          Document Website: https://raw.githack.com/jaywcjlove/changelog-generator/${{ steps.changelog.outputs.gh-pages-short-hash }}/index.html
+          Document Website: https://raw.githack.com/zhangyuan2015/changelog-generator/${{ steps.changelog.outputs.gh-pages-short-hash }}/index.html
       
     - name: Zip
       run: zip -r YTool.App.zip YTool.App/publish/
