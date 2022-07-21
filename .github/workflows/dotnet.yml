@@ -30,7 +30,7 @@ jobs:
       run: zip -r YTool.App.zip YTool.App/publish/
       
     - name: Create Tag
-      id: create_tag
+      id: create_tag 
       uses: jaywcjlove/create-tag-action@main
       with:
         test: '[P|p]ublish:[v|V]\d(\.\d+){0,2}'
