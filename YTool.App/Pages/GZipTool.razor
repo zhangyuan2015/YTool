@@ -1,0 +1,50 @@
+﻿@page "/YTool/GZipTool"
+@using YTool.Interface
+@inject IGZipInterface _gZipInterface
+
+<PageTitle>GZip工具</PageTitle>
+<div class="card-body">
+    <div class="row g-3">
+        <div class="col-1 col-lg-auto"><Button Size="Size.Small" OnClick="@Compress" Color="Color.Primary">压缩</Button></div>
+        <div class="col-1 col-lg-auto"><Button Size="Size.Small" OnClick="@Docompress" Color="Color.Primary">解压</Button></div>
+        <div class="col-1 col-lg-auto"><Button Size="Size.Small" OnClick="@DoClear" Color="Color.Primary">清空</Button></div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="row g-3">
+        <div class="col-12">
+            <Textarea placeholder="请输入 ..." rows="32" @bind-Value="@Text"></Textarea>
+        </div>
+    </div>
+</div>
+@code {
+
+    string Text { get; set; }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private void Compress(MouseEventArgs e)
+    {
+        Text = _gZipInterface.Compress(Text);
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private void Docompress(MouseEventArgs e)
+    {
+        Text = _gZipInterface.Decompress(Text);
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private void DoClear(MouseEventArgs e)
+    {
+        Text = "";
+    }
+}

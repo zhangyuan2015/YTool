@@ -2,3 +2,12 @@
 /YTool.Forms/bin
 /YTool.Forms/obj
 /packages
+/YTool.App/bin
+/YTool.App/obj
+
+/YTool.Service/bin
+/YTool.Service/obj
+
+/YTool.Interface/bin
+/YTool.Interface/obj
+YTool.App/publish/

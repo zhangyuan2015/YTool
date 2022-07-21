@@ -1,0 +1,89 @@
+﻿@page "/YTool/TimestampTool"
+@using YTool.Interface
+@using System
+@inject ITextInterface _textInterface
+
+<PageTitle>时间戳工具</PageTitle>
+<div class="card-body">
+    <div class="row g-3">
+        <div class="col-auto col-form-label">
+            <span>当前时间戳：</span>
+        </div>
+        <div class="col-3">
+            <BootstrapInput @bind-Value="@CurrentTimestamp" style="width:auto;" />
+        </div>
+        <div class="col-3">
+            <RadioList TValue="string" Items="@ConvertTypes" @bind-bind-Value="@ConvertType"></RadioList>
+        </div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="row g-3">
+        <div class="col-auto col-form-label">
+            <span>时间戳转换：</span>
+        </div>
+        <div class="col-3">
+            <BootstrapInput @bind-Value="@Timestamp" style="width:auto;" />
+        </div>
+        <div class="col-auto col-form-label">
+            <span>日期时间转换：</span>
+        </div>
+        <div class="col-3">
+            <BootstrapInput @bind-Value="@TimeText" style="width:auto;" />
+        </div>
+    </div>
+</div>
+@code {
+    long Timestamp { get; set; }
+    string TimeText { get; set; }
+    long CurrentTimestamp { get; set; }
+    static System.Timers.Timer timer;
+    private string ConvertType { get; set; }
+    private List<SelectedItem> ConvertTypes { get; set; }
+
+    public TimestampTool()
+    {
+        CurrentTimestamp = (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
+
+        ConvertTypes = new List<SelectedItem>(2)
+        {
+            new SelectedItem("Second", "秒"),
+            new SelectedItem("Millisecond", "毫秒"),
+        };
+
+        timer = new System.Timers.Timer(1000);
+        timer.Elapsed += SetCurrentTimestamp;//到达时间的时候执行事件；
+        timer.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
+        timer.Start(); //启动定时器    
+    }
+
+    private void TimeTextEnterEvent()
+    {
+
+    }
+
+    private void TimestampEnterEvent()
+    {
+
+    }
+
+    private void SetCurrentTimestamp(object source, System.Timers.ElapsedEventArgs e)
+    {
+        CurrentTimestamp = (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private DateTime StampToDateTime(long timeStamp)
+    {
+        DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+        long mTime = long.Parse(timeStamp + "0000");
+        TimeSpan toNow = new TimeSpan(mTime);
+        return startTime.Add(toNow);
+    }
+
+    private long DateTimeToStamp(DateTime dateTime)
+    {
+        TimeSpan timeSpan = dateTime - new DateTime(1970, 1, 1);
+        return (long)timeSpan.TotalMilliseconds;
+    }
+}

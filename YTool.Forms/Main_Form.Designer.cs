@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Form));
-            this.txt_Main = new System.Windows.Forms.TextBox();
             this.btn_Deduplication = new System.Windows.Forms.Button();
             this.btn_Sum = new System.Windows.Forms.Button();
             this.nfi_MinWindow = new System.Windows.Forms.NotifyIcon(this.components);
@@ -40,22 +39,34 @@
             this.tsm_Close = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_json_format = new System.Windows.Forms.Button();
             this.btn_json_compression = new System.Windows.Forms.Button();
+            this.btnImg2Base64 = new System.Windows.Forms.Button();
+            this.btnToUpper = new System.Windows.Forms.Button();
+            this.btnToLower = new System.Windows.Forms.Button();
+            this.btnDY = new System.Windows.Forms.Button();
+            this.btnSY = new System.Windows.Forms.Button();
+            this.btnDH = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.cbxFX = new System.Windows.Forms.CheckBox();
+            this.btnBF = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.txtGroupCount = new System.Windows.Forms.TextBox();
+            this.btnGroup = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtStatus = new System.Windows.Forms.TextBox();
+            this.txt_Main = new System.Windows.Forms.TextBox();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.cms_nfi.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txt_Main
-            // 
-            this.txt_Main.Location = new System.Drawing.Point(12, 46);
-            this.txt_Main.Multiline = true;
-            this.txt_Main.Name = "txt_Main";
-            this.txt_Main.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txt_Main.Size = new System.Drawing.Size(776, 345);
-            this.txt_Main.TabIndex = 0;
-            this.txt_Main.WordWrap = false;
             // 
             // btn_Deduplication
             // 
-            this.btn_Deduplication.Location = new System.Drawing.Point(12, 12);
+            this.btn_Deduplication.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Deduplication.Location = new System.Drawing.Point(3, 3);
             this.btn_Deduplication.Name = "btn_Deduplication";
             this.btn_Deduplication.Size = new System.Drawing.Size(75, 23);
             this.btn_Deduplication.TabIndex = 1;
@@ -65,7 +76,8 @@
             // 
             // btn_Sum
             // 
-            this.btn_Sum.Location = new System.Drawing.Point(93, 12);
+            this.btn_Sum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Sum.Location = new System.Drawing.Point(246, 3);
             this.btn_Sum.Name = "btn_Sum";
             this.btn_Sum.Size = new System.Drawing.Size(75, 23);
             this.btn_Sum.TabIndex = 2;
@@ -113,46 +125,215 @@
             // 
             // btn_json_format
             // 
-            this.btn_json_format.Location = new System.Drawing.Point(174, 12);
+            this.btn_json_format.Location = new System.Drawing.Point(327, 3);
             this.btn_json_format.Name = "btn_json_format";
-            this.btn_json_format.Size = new System.Drawing.Size(75, 23);
+            this.btn_json_format.Size = new System.Drawing.Size(79, 23);
             this.btn_json_format.TabIndex = 3;
-            this.btn_json_format.Text = "Json格式化";
+            this.btn_json_format.Text = "Json 格式化";
             this.btn_json_format.UseVisualStyleBackColor = true;
             this.btn_json_format.Click += new System.EventHandler(this.btn_json_format_Click);
             // 
             // btn_json_compression
             // 
-            this.btn_json_compression.Location = new System.Drawing.Point(255, 12);
+            this.btn_json_compression.Location = new System.Drawing.Point(84, 3);
             this.btn_json_compression.Name = "btn_json_compression";
             this.btn_json_compression.Size = new System.Drawing.Size(75, 23);
             this.btn_json_compression.TabIndex = 4;
-            this.btn_json_compression.Text = "Json压缩";
+            this.btn_json_compression.Text = "Json 压缩";
             this.btn_json_compression.UseVisualStyleBackColor = true;
             this.btn_json_compression.Click += new System.EventHandler(this.btn_json_compression_Click);
+            // 
+            // btnImg2Base64
+            // 
+            this.btnImg2Base64.Location = new System.Drawing.Point(493, 3);
+            this.btnImg2Base64.Name = "btnImg2Base64";
+            this.btnImg2Base64.Size = new System.Drawing.Size(91, 23);
+            this.btnImg2Base64.TabIndex = 5;
+            this.btnImg2Base64.Text = "图片 2 Base64";
+            this.btnImg2Base64.UseVisualStyleBackColor = true;
+            this.btnImg2Base64.Click += new System.EventHandler(this.btnImg2Base64_Click);
+            // 
+            // btnToUpper
+            // 
+            this.btnToUpper.Location = new System.Drawing.Point(412, 3);
+            this.btnToUpper.Name = "btnToUpper";
+            this.btnToUpper.Size = new System.Drawing.Size(75, 23);
+            this.btnToUpper.TabIndex = 6;
+            this.btnToUpper.Text = "转大写";
+            this.btnToUpper.UseVisualStyleBackColor = true;
+            this.btnToUpper.Click += new System.EventHandler(this.btnToUpper_Click);
+            // 
+            // btnToLower
+            // 
+            this.btnToLower.Location = new System.Drawing.Point(165, 3);
+            this.btnToLower.Name = "btnToLower";
+            this.btnToLower.Size = new System.Drawing.Size(75, 23);
+            this.btnToLower.TabIndex = 7;
+            this.btnToLower.Text = "转小写";
+            this.btnToLower.UseVisualStyleBackColor = true;
+            this.btnToLower.Click += new System.EventHandler(this.btnToLower_Click);
+            // 
+            // btnDY
+            // 
+            this.btnDY.Location = new System.Drawing.Point(2, -1);
+            this.btnDY.Name = "btnDY";
+            this.btnDY.Size = new System.Drawing.Size(26, 23);
+            this.btnDY.TabIndex = 8;
+            this.btnDY.Text = "\'\'";
+            this.btnDY.UseVisualStyleBackColor = true;
+            this.btnDY.Click += new System.EventHandler(this.btnDY_Click);
+            // 
+            // btnSY
+            // 
+            this.btnSY.Location = new System.Drawing.Point(32, -1);
+            this.btnSY.Name = "btnSY";
+            this.btnSY.Size = new System.Drawing.Size(26, 23);
+            this.btnSY.TabIndex = 9;
+            this.btnSY.Text = "\"\"";
+            this.btnSY.UseVisualStyleBackColor = true;
+            this.btnSY.Click += new System.EventHandler(this.btnSY_Click);
+            // 
+            // btnDH
+            // 
+            this.btnDH.Location = new System.Drawing.Point(64, -1);
+            this.btnDH.Name = "btnDH";
+            this.btnDH.Size = new System.Drawing.Size(26, 23);
+            this.btnDH.TabIndex = 10;
+            this.btnDH.Text = ",";
+            this.btnDH.UseVisualStyleBackColor = true;
+            this.btnDH.Click += new System.EventHandler(this.btnDH_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.cbxFX);
+            this.panel1.Controls.Add(this.btnDY);
+            this.panel1.Controls.Add(this.btnDH);
+            this.panel1.Controls.Add(this.btnSY);
+            this.panel1.Location = new System.Drawing.Point(3, 32);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(150, 23);
+            this.panel1.TabIndex = 11;
+            // 
+            // cbxFX
+            // 
+            this.cbxFX.AutoSize = true;
+            this.cbxFX.Location = new System.Drawing.Point(96, 3);
+            this.cbxFX.Name = "cbxFX";
+            this.cbxFX.Size = new System.Drawing.Size(48, 16);
+            this.cbxFX.TabIndex = 12;
+            this.cbxFX.Text = "清除";
+            this.cbxFX.UseVisualStyleBackColor = true;
+            // 
+            // btnBF
+            // 
+            this.btnBF.Location = new System.Drawing.Point(590, 3);
+            this.btnBF.Name = "btnBF";
+            this.btnBF.Size = new System.Drawing.Size(75, 23);
+            this.btnBF.TabIndex = 12;
+            this.btnBF.Text = "并发";
+            this.btnBF.UseVisualStyleBackColor = true;
+            this.btnBF.Click += new System.EventHandler(this.btnBF_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.txtGroupCount);
+            this.panel2.Controls.Add(this.btnGroup);
+            this.panel2.Location = new System.Drawing.Point(159, 32);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(143, 23);
+            this.panel2.TabIndex = 13;
+            // 
+            // txtGroupCount
+            // 
+            this.txtGroupCount.Location = new System.Drawing.Point(3, 0);
+            this.txtGroupCount.Name = "txtGroupCount";
+            this.txtGroupCount.Size = new System.Drawing.Size(51, 21);
+            this.txtGroupCount.TabIndex = 14;
+            // 
+            // btnGroup
+            // 
+            this.btnGroup.Location = new System.Drawing.Point(59, -1);
+            this.btnGroup.Name = "btnGroup";
+            this.btnGroup.Size = new System.Drawing.Size(75, 23);
+            this.btnGroup.TabIndex = 14;
+            this.btnGroup.Text = "分组";
+            this.btnGroup.UseVisualStyleBackColor = true;
+            this.btnGroup.Click += new System.EventHandler(this.btnGroup_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.txtStatus);
+            this.panel4.Controls.Add(this.txt_Main);
+            this.panel4.Location = new System.Drawing.Point(12, 136);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(796, 380);
+            this.panel4.TabIndex = 16;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btn_Deduplication);
+            this.flowLayoutPanel1.Controls.Add(this.btn_json_compression);
+            this.flowLayoutPanel1.Controls.Add(this.btnToLower);
+            this.flowLayoutPanel1.Controls.Add(this.btn_Sum);
+            this.flowLayoutPanel1.Controls.Add(this.btn_json_format);
+            this.flowLayoutPanel1.Controls.Add(this.btnToUpper);
+            this.flowLayoutPanel1.Controls.Add(this.btnImg2Base64);
+            this.flowLayoutPanel1.Controls.Add(this.btnBF);
+            this.flowLayoutPanel1.Controls.Add(this.panel1);
+            this.flowLayoutPanel1.Controls.Add(this.panel2);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 58);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(796, 72);
+            this.flowLayoutPanel1.TabIndex = 19;
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Location = new System.Drawing.Point(0, 359);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(796, 21);
+            this.txtStatus.TabIndex = 17;
+            // 
+            // txt_Main
+            // 
+            this.txt_Main.Location = new System.Drawing.Point(0, 0);
+            this.txt_Main.Multiline = true;
+            this.txt_Main.Name = "txt_Main";
+            this.txt_Main.Size = new System.Drawing.Size(796, 353);
+            this.txt_Main.TabIndex = 16;
+            // 
+            // panel5
+            // 
+            this.panel5.Location = new System.Drawing.Point(12, 522);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(796, 32);
+            this.panel5.TabIndex = 16;
             // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 411);
-            this.Controls.Add(this.btn_json_compression);
-            this.Controls.Add(this.btn_json_format);
-            this.Controls.Add(this.btn_Sum);
-            this.Controls.Add(this.btn_Deduplication);
-            this.Controls.Add(this.txt_Main);
+            this.ClientSize = new System.Drawing.Size(820, 559);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.panel4);
             this.Name = "Main_Form";
             this.Text = "YTool";
             this.SizeChanged += new System.EventHandler(this.Main_Form_SizeChanged);
             this.cms_nfi.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txt_Main;
         private System.Windows.Forms.Button btn_Deduplication;
         private System.Windows.Forms.Button btn_Sum;
         private System.Windows.Forms.NotifyIcon nfi_MinWindow;
@@ -162,6 +343,23 @@
         private System.Windows.Forms.ToolStripMenuItem tsm_Close;
         private System.Windows.Forms.Button btn_json_format;
         private System.Windows.Forms.Button btn_json_compression;
+        private System.Windows.Forms.Button btnImg2Base64;
+        private System.Windows.Forms.Button btnToUpper;
+        private System.Windows.Forms.Button btnToLower;
+        private System.Windows.Forms.Button btnDY;
+        private System.Windows.Forms.Button btnSY;
+        private System.Windows.Forms.Button btnDH;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox cbxFX;
+        private System.Windows.Forms.Button btnBF;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnGroup;
+        private System.Windows.Forms.TextBox txtGroupCount;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.TextBox txt_Main;
+        private System.Windows.Forms.TextBox txtStatus;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
 

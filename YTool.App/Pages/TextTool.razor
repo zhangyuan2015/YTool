@@ -1,0 +1,107 @@
+﻿@page "/YTool/TextTool"
+@using YTool.Interface
+@inject ITextInterface _textInterface
+
+<PageTitle>文本工具</PageTitle>
+<div class="card-body">
+    <div class="row g-3">
+        <div class="col-1 col-lg-auto"><Button Size="Size.Small" OnClick="@RemoveDuplicate" Color="Color.Primary">去重</Button></div>
+        <div class="col-1 col-lg-auto"><Button Size="Size.Small" OnClick="@ToUpper" Color="Color.Primary">转大写</Button></div>
+        <div class="col-1 col-lg-auto"><Button Size="Size.Small" OnClick="@ToLower" Color="Color.Primary">转小写</Button></div>
+
+        <div class="btn-group col-1 col-lg-auto" role="group">
+            <Button Size="Size.Small" OnClick="@AddDoubleQuotes" Color="Color.Primary">"&nbsp;&nbsp;"&nbsp;&nbsp;<Checkbox DisplayText="去除" Color="Color.Primary" @bind-Value="@IsReverse" style="float: right;"></Checkbox></Button>
+        </div>
+
+        <div class="btn-group col-1 col-lg-auto" role="group">
+            <Button Size="Size.Small" OnClick="@AddSingleQuotes" Color="Color.Primary">'&nbsp;&nbsp;'&nbsp;&nbsp;<Checkbox DisplayText="去除" Color="Color.Primary" @bind-Value="@IsReverse" style="float: right;"></Checkbox></Button>
+        </div>
+
+        <div class="btn-group col-1 col-lg-auto" role="group">
+            <Button Size="Size.Small" OnClick="@AddComma" Color="Color.Primary">&nbsp;&nbsp;,&nbsp;&nbsp;<Checkbox DisplayText="去除" Color="Color.Primary" @bind-Value="@IsReverse" style="float: right;"></Checkbox></Button>
+        </div>
+
+        <div class="col-1 col-lg-auto">
+            <div class="btn-group" role="group">
+                <BootstrapInput @bind-Value="@GroupCount" style="width:60px;" />
+                <Button Size="Size.Small" OnClick="@Group" Color="Color.Primary">分组</Button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="row g-3">
+        <div class="col-12">
+            <Textarea placeholder="请输入 ..." rows="32" @bind-Value="@Text"></Textarea>
+        </div>
+    </div>
+</div>
+@code {
+
+    string Text { get; set; }
+    bool IsReverse { get; set; }
+    int GroupCount { get; set; }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private void RemoveDuplicate(MouseEventArgs e)
+    {
+        Text = _textInterface.RemoveDuplicate(Text);
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private void ToUpper(MouseEventArgs e)
+    {
+        Text = _textInterface.ToUpper(Text);
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private void ToLower(MouseEventArgs e)
+    {
+        Text = _textInterface.ToLower(Text);
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private void AddDoubleQuotes(MouseEventArgs e)
+    {
+        Text = _textInterface.AddDoubleQuotes(Text, IsReverse);
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private void AddSingleQuotes(MouseEventArgs e)
+    {
+        Text = _textInterface.AddSingleQuotes(Text, IsReverse);
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private void AddComma(MouseEventArgs e)
+    {
+        Text = _textInterface.AddComma(Text, IsReverse);
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="e"></param>
+    private void Group(MouseEventArgs e)
+    {
+        Text = _textInterface.Group(Text, GroupCount);
+    }
+}
