@@ -33,7 +33,7 @@ jobs:
       id: create_tag 
       uses: jaywcjlove/create-tag-action@main
       with:
-        token: ${{ github.token }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         test: '[P|p]ublish:[v|V]\d(\.\d+){0,2}'
       
     - name: Generate Changelog
