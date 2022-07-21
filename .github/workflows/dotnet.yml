@@ -24,7 +24,7 @@ jobs:
       
     - name: Generate Changelog
       id: changelog
-      uses: jaywcjlove/changelog-generator@main
+      uses: jaywcjlove/changelog-generator@v1.5.0
       if: steps.create_tag.outputs.successful
       with:
         token: ${{ secrets.C_GITHUB_TOKEN }}
