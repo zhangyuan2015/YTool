@@ -27,6 +27,13 @@
                 <Button Size="Size.Small" OnClick="@Group" Color="Color.Primary">分组</Button>
             </div>
         </div>
+
+        <div class="col-1 col-lg-auto">
+            <div class="btn-group" role="group">
+                <BootstrapInput @bind-Value="@LineFeedSymbol" style="width:60px;" />
+                <Button Size="Size.Small" OnClick="@LineFeed" Color="Color.Primary">换行</Button>
+            </div>
+        </div>
     </div>
 </div>
 <div class="card-body">
@@ -38,9 +45,10 @@
 </div>
 @code {
 
-    string Text { get; set; }
+    string? Text { get; set; }
     bool IsReverse { get; set; }
     int GroupCount { get; set; }
+    char? LineFeedSymbol { get; set; }
 
     /// <summary>
     ///
@@ -103,5 +111,10 @@
     private void Group(MouseEventArgs e)
     {
         Text = _textInterface.Group(Text, GroupCount);
+    }
+
+    private void LineFeed(MouseEventArgs e)
+    {
+        Text = _textInterface.LineFeed(Text, LineFeedSymbol);
     }
 }

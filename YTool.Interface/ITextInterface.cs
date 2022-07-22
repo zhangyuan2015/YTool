@@ -54,5 +54,13 @@
         /// <param name="groupCount"></param>
         /// <returns></returns>
         string Group(string text, int groupCount);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="lineFeedSymbol"></param>
+        /// <returns></returns>
+        string LineFeed(string text, char? lineFeedSymbol);
     }
 }
