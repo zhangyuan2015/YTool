@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\YTool.Interface\YTool.Interface.csproj" />
+    <ProjectReference Include="..\YTool.Model\YTool.Model.csproj" />
     <ProjectReference Include="..\YTool.Service\YTool.Service.csproj" />
   </ItemGroup>
 

@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\YTool.Model\YTool.Model.csproj" />
-  </ItemGroup>
-
 </Project>

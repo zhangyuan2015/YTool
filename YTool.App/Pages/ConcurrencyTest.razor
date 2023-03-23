@@ -1,0 +1,44 @@
+﻿@page "/YTool/ConcurrencyTest"
+@using System.Text
+@using YTool.Interface
+@using YTool.Model
+@inject IConcurrencyTestInterface _concurrencyTestInterface
+
+<PageTitle>并发测试工具</PageTitle>
+<div class="card-body">
+    <div class="row g-3">
+        <div class="col-1 col-lg-auto"><Button Size="Size.Small" OnClick="@Test" Color="Color.Primary">测试</Button></div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="row g-3">
+        <div class="col-12">
+            <Textarea placeholder="请输入 ..." rows="32" @bind-Value="@Text"></Textarea>
+        </div>
+    </div>
+</div>
+@code {
+
+    string? Text { get; set; }
+    
+    public async void Test(MouseEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(Text))
+        {
+            return;
+        }
+
+        PostmanModel postmanModel = _concurrencyTestInterface.ConvertToModel(Text);
+
+        Text = "";
+        foreach (var item in postmanModel.item)
+        {
+            var requestContent = new StringContent(item.request.body.raw, Encoding.UTF8);
+
+            //Task.Run(() => Text += _concurrencyTestInterface.Post(item) + Environment.NewLine);
+            using var response = await new HttpClient().PostAsync(item.request.url.raw, requestContent);
+            var res = await response.Content.ReadAsStringAsync();
+            Text += res + Environment.NewLine;
+        }
+    }
+}
